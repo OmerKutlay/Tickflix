@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Web", "Tickflix.Web\Tickflix.Web.csproj", "{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Models", "Tickflix.Models\Tickflix.Models.csproj", "{FD80C3CA-6C9A-433F-907F-128BAEB63467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
