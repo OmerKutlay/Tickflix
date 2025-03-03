@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tickflix.Web;
 
@@ -11,9 +12,11 @@ using Tickflix.Web;
 namespace Tickflix.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250303141032_reletionships")]
+    partial class reletionships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Tickflix.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ActorMovie", b =>
-                {
-                    b.Property<int>("ActorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActorsId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("ActorMovie");
-                });
 
             modelBuilder.Entity("Tickflix.Models.Actor", b =>
                 {
@@ -95,7 +83,10 @@ namespace Tickflix.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CinemaId")
+                    b.Property<int>("ActorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CinemaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -119,13 +110,15 @@ namespace Tickflix.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProducerId")
+                    b.Property<int?>("ProducerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActorsId");
 
                     b.HasIndex("CinemaId");
 
@@ -159,38 +152,28 @@ namespace Tickflix.Data.Migrations
                     b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("ActorMovie", b =>
+            modelBuilder.Entity("Tickflix.Models.Movie", b =>
                 {
-                    b.HasOne("Tickflix.Models.Actor", null)
-                        .WithMany()
+                    b.HasOne("Tickflix.Models.Actor", "Actors")
+                        .WithMany("Movies")
                         .HasForeignKey("ActorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickflix.Models.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Tickflix.Models.Cinema", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("CinemaId");
+
+                    b.HasOne("Tickflix.Models.Producer", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("ProducerId");
+
+                    b.Navigation("Actors");
                 });
 
-            modelBuilder.Entity("Tickflix.Models.Movie", b =>
+            modelBuilder.Entity("Tickflix.Models.Actor", b =>
                 {
-                    b.HasOne("Tickflix.Models.Cinema", "Cinema")
-                        .WithMany("Movies")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tickflix.Models.Producer", "Producer")
-                        .WithMany("Movies")
-                        .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cinema");
-
-                    b.Navigation("Producer");
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("Tickflix.Models.Cinema", b =>
