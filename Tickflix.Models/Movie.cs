@@ -17,5 +17,12 @@ namespace Tickflix.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
+
+        public int CinemaId { get; set; }
+        public virtual Cinema Cinema { get; set; }
+        public int ProducerId { get; set; }
+        public virtual Producer Producer { get; set; }
+        public ICollection<Actor> Actors { get; set; }
+        
     }
 }

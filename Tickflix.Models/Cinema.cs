@@ -12,5 +12,6 @@ namespace Tickflix.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Logo { get; set; }
+        public ICollection<Movie> Movies { get; set; }
     }
 }
