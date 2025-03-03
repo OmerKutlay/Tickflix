@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Web", "Tickflix.Web\Tickflix.Web.csproj", "{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Models", "Tickflix.Models\Tickflix.Models.csproj", "{FD80C3CA-6C9A-433F-907F-128BAEB63467}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Models", "Tickflix.Models\Tickflix.Models.csproj", "{237FBE24-B35B-43C7-940B-DE3FB1EF0179}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Data", "Tickflix.Data\Tickflix.Data.csproj", "{3AABF14D-00DC-4FB4-88DA-2470216CEDD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8AB9FF-510D-4D1A-9499-A94A794CCCD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD80C3CA-6C9A-433F-907F-128BAEB63467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237FBE24-B35B-43C7-940B-DE3FB1EF0179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237FBE24-B35B-43C7-940B-DE3FB1EF0179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237FBE24-B35B-43C7-940B-DE3FB1EF0179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237FBE24-B35B-43C7-940B-DE3FB1EF0179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AABF14D-00DC-4FB4-88DA-2470216CEDD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AABF14D-00DC-4FB4-88DA-2470216CEDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AABF14D-00DC-4FB4-88DA-2470216CEDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AABF14D-00DC-4FB4-88DA-2470216CEDD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
