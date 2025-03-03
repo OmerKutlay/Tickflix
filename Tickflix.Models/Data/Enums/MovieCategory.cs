@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickflix.Models.Data
+namespace Tickflix.Models.Data.Enums
 {
     public enum MovieCategory
     {
