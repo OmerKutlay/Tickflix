@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tickflix.Web.Controllers
 {
@@ -11,8 +12,9 @@ namespace Tickflix.Web.Controllers
             _context = context;
         }
         public IActionResult Index()
-        { var data = _context.Movies.ToList();
-            return View();
+        { 
+            var allMovies = _context.Movies.Include(n => n.Cinema).ToList();
+            return View(allMovies);
         }
     }
 }
