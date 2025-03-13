@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Tickflix.Web\Tickflix.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Shared\Concrete\" />
-  </ItemGroup>
-
 </Project>
