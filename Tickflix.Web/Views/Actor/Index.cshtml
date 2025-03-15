@@ -1,5 +1,98 @@
-﻿@using Tickflix.Models
-@model IEnumerable<Actor>
+﻿<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-gradient bg-warning text-white ">
+                <div class="row">
+                    <div class="col-11  fs-3 text-white>
+                        <box-icon name="dining" color="white" size="sm" animation="tada"></box-icon>Actors
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="tblActor" class="table table-hovered table-striped table-bordered"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* MODAL *@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label class="form-label">Profile Picture:</label>
+                    <input type="text" id="txtprofilePictureURL" placeholder="Enter it in URL form" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Actor Name:</label>
+                    <input type="text" id="txtactorName" placeholder="" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Biography:</label>
+                    <input type="text" id="txtbio" placeholder="" class="form-control" required />
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">+Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*  <div class="col-1 text-end">
+                        <a id="btnAdd" href="#" class="btn btn-success ">+ Add New</a>
+                    </div> *@
+
+<div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
+    <a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+        var DataTable = "";
+
+        $(document).ready(() => {
+
+        DataTable = $("#tblActor").DataTable({
+                ajax: '/Actor/GetAll',
+                columns: [
+                    { data: 'profilePictureURL', title: 'Profile Picture', "render": function(data) {
+                    return `<img src="${data}" class="img-thumbnail" style="width: 200px; height: 200px;" />`;
+                }},
+                    { data: 'fullName', title: 'Name' },
+                    { data: 'bio', title: 'Biography' },
+                    {
+                        data: 'id', title: 'İşlemler', render: (data) => {
+                            return `
+                    <a class="btn btn-outline-primary" onclick="updateActor(${data}, this)" title="Edit" href="#">
+                        <i class="bi bi-pencil-square"></i>Edit</a>
+                     <a class="btn btn-outline-warning" onclick="detailActor(${data}, this)" title="Details" href="#">
+                        <i class="bi bi-eye" font-size: 1.2em;"></i>Details</a>
+                    <a class="btn btn-outline-danger text-red" onclick="deleteActor(${data}, this)" title="Delete" href="#">
+                        <i class="bi bi-trash"  font-size: 1.2em;"></i>Delete</a>`;
+                        }
+                    }
+                ]
+            });
+
+            $("#btnAdd").click(() =>{
+                $("#modal").modal("show");
+                $("#btnSave").text("+Add");
+                $("#modalTitle").text("Add New Actor");
+                $("#txtprofilePictureURL").val('');
+                $("#txtactorName").val('');
+                $("#txtbio").val('');
 
 @{
     ViewData["Title"] = "List of Actors";
