@@ -94,8 +94,18 @@
                 $("#txtactorName").val('');
                 $("#txtbio").val('');
 
-@{
-    ViewData["Title"] = "List of Actors";
+                $("#btnSave").off.click(() => {
+                $.ajax({
+                url:'/Actor/Add',
+                type: 'POST',
+                data: {
+                   profilePictureURL: $("#txtprofilePictureURL").val(),
+                   fullName: $("#txtactorName").val(),
+                   bio: $("#txtbio").val()
+                },
+                success: (res) => {
+                    $("#modal").modal("hide");
+                    DataTable.row.add(res).draw(false);
 }
 
 <div class="row">
