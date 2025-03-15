@@ -23,6 +23,9 @@
                 <h5 class="modal-title" id="modalTitle"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="text-center">
+                <img id="imgPreview" src="" class="img-thumbnail d-none" style="width: 200px; height: 200px;" />
+            </div>
             <div class="modal-body">
                 <div class="mb-3 row">
                     <label class="form-label">Profile Picture:</label>
@@ -63,6 +66,15 @@
         var DataTable = "";
 
         $(document).ready(() => {
+
+                $("#txtprofilePictureURL").on("input", function() {
+            var url = $(this).val();
+            if (url) {
+                $("#imgPreview").attr("src", url).removeClass("d-none");
+            } else {
+                $("#imgPreview").addClass("d-none");
+            }
+        });
 
         DataTable = $("#tblActor").DataTable({
                 ajax: '/Actor/GetAll',
