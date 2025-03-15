@@ -16,8 +16,18 @@ namespace Tickflix.Web.Controllers
 
         public IActionResult Index()
         {
-            var data = _context.Actors.ToList();
-            return View(data);
+
+            return View();
+        }
+
+        public IActionResult GetAll()
+        {
+            return Json(new { data = _actorService.GetAll() });
+        }
+        [HttpPost]
+        public IActionResult Add(Actor actor)
+        {
+            return Ok(_actorService.Add(actor));
         }
     }
 }
