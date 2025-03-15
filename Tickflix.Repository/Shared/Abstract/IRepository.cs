@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tickflix.Repository.Shared.Abstract
 {
-    internal interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);

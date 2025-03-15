@@ -94,7 +94,7 @@
                 $("#txtactorName").val('');
                 $("#txtbio").val('');
 
-                $("#btnSave").off.click(() => {
+                $("#btnSave").off().click(() => {
                 $.ajax({
                 url:'/Actor/Add',
                 type: 'POST',

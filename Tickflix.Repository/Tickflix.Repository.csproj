@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -9,8 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tickflix.Data\Tickflix.Data.csproj" />
-    <ProjectReference Include="..\Tickflix.Models\Tickflix.Models.csproj" />
-    <ProjectReference Include="..\Tickflix.Web\Tickflix.Web.csproj" />
   </ItemGroup>
 
 </Project>
