@@ -13,11 +13,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NEST" Version="7.17.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Tickflix.Data\Tickflix.Data.csproj" />
     <ProjectReference Include="..\Tickflix.Models\Tickflix.Models.csproj" />
+    <ProjectReference Include="..\Tickflix.Repository\Tickflix.Repository.csproj" />
   </ItemGroup>
 
 </Project>
