@@ -142,16 +142,36 @@
                         res.fullName = $('#txtactorName').val();
                         res.bio = $('#txtbio').val();
 
+                        $.ajax({
+                            url: '/Actor/Update',
+                            type: 'POST',
+                            data: res,
+                            success: (res) => {
+                               let row = $(button).parent().parent();
+                               DataTable.row(row).data(res).draw(false);
+                               $("#modal").modal("hide");
+                        }
+                        });
+                    });
+                }
+            });
+        }
 
 
 
-
-
-
+        function deleteActor(actorId, button) {
+            if (confirm("Are you sure to delete this actor?")) {
+                $.ajax({
+                    url: '/Actor/Delete',
+                    type: 'POST',
+                    data: { id: actorId },
+                    success: (res) => {
+                        let row = $(button).parent().parent();
+                        DataTable.row(row).remove().draw(false);
+                    }
         });
-
-        
-
+            }
+        }
         
 
 
