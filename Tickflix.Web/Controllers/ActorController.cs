@@ -29,5 +29,21 @@ namespace Tickflix.Web.Controllers
         {
             return Ok(_actorService.Add(actor));
         }
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_actorService.GetById(id));
+        }
+        [HttpPost]
+        public IActionResult Update(Actor actor)
+        {
+            return Ok(_actorService.Update(actor));
+        }
+        [HttpPost]
+        public IActionResult Delete(Actor actor)
+        {
+            _actorService.Delete(actor);
+            return Ok();
+        }
     }
 }
