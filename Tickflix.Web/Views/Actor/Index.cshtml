@@ -123,7 +123,24 @@
                 });
             });
 
+        });
 
+        function updateActor(actorId, button) {
+            $.ajax({
+                url: '/Actor/GetById',
+                type: 'Get',
+                data: { id: actorId },
+                success: (res) => {
+                    $('#modal').modal("show");
+                    $('#txtprofilePictureURL').val(res.profilePictureURL);
+                    $('#txtactorName').val(res.fullName);
+                    $('#txtbio').val(res.bio);
+                    $('#imgPreview').attr('src', res.profilePictureURL).removeClass('d-none');
+                    $('#modalTitle').text("Update Actor");
+                    $('#btnSave').text("Update").off().click(() => {
+                        res.profilePictureURL = $('#txtprofilePictureURL').val();
+                        res.fullName = $('#txtactorName').val();
+                        res.bio = $('#txtbio').val();
 
 
 
