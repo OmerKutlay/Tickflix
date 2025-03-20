@@ -1,19 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Tickflix.Models;
+using Tickflix.Repository.Shared.Abstract;
+
 
 namespace Tickflix.Web.Controllers
 {
     public class CinemaController : Controller
     {
-        private readonly AppDbContext _context;
+       private readonly IRepository<Cinema> _cinemaService;
 
-        public CinemaController(AppDbContext context)
+        public CinemaController(IRepository<Cinema> cinemaService)
         {
-            _context = context;
+            _cinemaService = cinemaService;
         }
         public IActionResult Index()
         {
-            var data = _context.Cinemas.ToList();
-            return View(data);
+            return View();
+        }
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            
+            return Json(new { data = _cinemaService.GetAll() });
+        }
+        [HttpPost]
+        public IActionResult Add(Cinema cinema)
+        {
+            return Ok(_cinemaService.Add(cinema));
+        }
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_cinemaService.GetById(id));
+        }
+        [HttpPost]
+        public IActionResult Update(Cinema cinema)
+        {
+            return Ok(_cinemaService.Update(cinema));
+        }
+        [HttpPost]
+        public IActionResult Delete(Cinema cinema)
+        {
+            _cinemaService.Delete(cinema);
+            return Ok();
         }
     }
 }
