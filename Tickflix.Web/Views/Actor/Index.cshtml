@@ -49,11 +49,6 @@
     </div>
 </div>
 
-
-@*  <div class="col-1 text-end">
-                        <a id="btnAdd" href="#" class="btn btn-success ">+ Add New</a>
-                    </div> *@
-
 <div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
     <a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
 
@@ -98,10 +93,11 @@
                 ]
             });
 
-            $("#btnAdd").click(() =>{
+            $("#btnAdd").click(() => {
                 $("#modal").modal("show");
                 $("#btnSave").text("+Add");
                 $("#modalTitle").text("Add New Actor");
+                $("#imgPreview").addClass("d-none");
                 $("#txtprofilePictureURL").val('');
                 $("#txtactorName").val('');
                 $("#txtbio").val('');
@@ -128,7 +124,7 @@
         function updateActor(actorId, button) {
             $.ajax({
                 url: '/Actor/GetById',
-                type: 'Get',
+                type: 'GET',
                 data: { id: actorId },
                 success: (res) => {
                     $('#modal').modal("show");
@@ -172,28 +168,5 @@
                 });
             }
         }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 }
