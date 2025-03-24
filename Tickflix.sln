@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Data", "Tickflix.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Repository", "Tickflix.Repository\Tickflix.Repository.csproj", "{4F8A1E4F-7157-4F89-9809-DAC94FAC6AFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickflix.Business", "Tickflix.Business\Tickflix.Business.csproj", "{7001B856-0FB7-40F9-B9B7-F3005F6D9BEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4F8A1E4F-7157-4F89-9809-DAC94FAC6AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8A1E4F-7157-4F89-9809-DAC94FAC6AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8A1E4F-7157-4F89-9809-DAC94FAC6AFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7001B856-0FB7-40F9-B9B7-F3005F6D9BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7001B856-0FB7-40F9-B9B7-F3005F6D9BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7001B856-0FB7-40F9-B9B7-F3005F6D9BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7001B856-0FB7-40F9-B9B7-F3005F6D9BEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
