@@ -1,8 +1,71 @@
-﻿@using Tickflix.Models
-@model IEnumerable<Producer>
+﻿<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-gradient bg-warning text-white ">
+                <div class="row">
+                    <div class="col-11  fs-3 text-white>
+                        <box-icon name="dining" color="white" size="sm" animation="tada"></box-icon>Producers
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="tblProducer" class="table table-hovered table-striped table-bordered"></table>
+            </div>
+        </div>
+    </div>
+</div>
 
-@{
-    ViewBag.Title = "List of Producers";
+@* MODAL *@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="text-center">
+                <img id="imgPreview" src="" class="img-thumbnail d-none" style="width: 200px; height: 200px;" />
+            </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label class="form-label">Profile Picture:</label>
+                    <input type="text" id="txtprofilePictureURL" placeholder="Enter it in URL form" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Producer Name:</label>
+                    <input type="text" id="txtProducerName" placeholder="" class="form-control" required />
+                </div>
+                <div class="mb-3 row">
+                    <label class="form-label">Biography:</label>
+                    <input type="text" id="txtbio" placeholder="" class="form-control" required />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">+Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
+    <a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+
+</div>
+
+@section Scripts {
+    <script>
+        var DataTable = "";
+
+        $(document).ready(() => {
+
+                $("#txtprofilePictureURL").on("input", function() {
+            var url = $(this).val();
+            if (url) {
+                $("#imgPreview").attr("src", url).removeClass("d-none");
+            } else {
+                $("#imgPreview").addClass("d-none");
 }
 
 <div class="row">
