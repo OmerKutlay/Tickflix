@@ -66,44 +66,105 @@
                 $("#imgPreview").attr("src", url).removeClass("d-none");
             } else {
                 $("#imgPreview").addClass("d-none");
-}
+            }
+        });
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
-                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Bio)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <td class="allign-middle">
-                    <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width: 150px" />
-                </td>
-                <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td class="allign-middle">
-                        @Html.DisplayFor(modelItem => item.Bio)
-                </td>
+        DataTable = $("#tblProducer").DataTable({
+                ajax: '/Producer/GetAll',
+                columns: [
+                    { data: 'profilePictureURL', title: 'Profile Picture', "render": function(data) {
+                    return `<img src="${data}" class="img-thumbnail" style="width: 200px; height: 200px;" />`;
+                }},
+                    { data: 'fullName', title: 'Name' },
+                    { data: 'bio', title: 'Biography' },
+                    {
+                        data: 'id', title: 'İşlemler', render: (data) => {
+                            return `
+                    <a class="btn btn-outline-primary" onclick="updateProducer(${data}, this)" title="Edit" href="#">
+                        <i class="bi bi-pencil-square"></i>Edit</a>
+                     <a class="btn btn-outline-warning" onclick="detailProducer(${data}, this)" title="Details" href="#">
+                        <i class="bi bi-eye" font-size: 1.2em;"></i>Details</a>
+                    <a class="btn btn-outline-danger text-red" onclick="deleteProducer(${data}, this)" title="Delete" href="#">
+                        <i class="bi bi-trash"  font-size: 1.2em;"></i>Delete</a>`;
+                        }
+                    }
+                ]
+            });
 
-                <td class="allign-middle">
-                    <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a> |
-                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
-                    <a class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete</a>
+            $("#btnAdd").click(() => {
+                $("#modal").modal("show");
+                $("#btnSave").text("+Add");
+                $("#modalTitle").text("Add New Producer");
+                $("#imgPreview").addClass("d-none");
+                $("#txtprofilePictureURL").val('');
+                $("#txtProducerName").val('');
+                $("#txtbio").val('');
 
-
-
-                </td>
+                $("#btnSave").off().click(() => {
+                $.ajax({
+                url:'/Producer/Add',
+                type: 'POST',
+                data: {
+                   profilePictureURL: $("#txtprofilePictureURL").val(),
+                   fullName: $("#txtProducerName").val(),
+                   bio: $("#txtbio").val()
+                },
+                success: (res) => {
+                    $("#modal").modal("hide");
+                    DataTable.row.add(res).draw(false);
                 }
-            </tbody>
-        </table>
+                });
+                });
+            });
 
-    </div>
+        });
 
-</div>
+        function updateProducer(ProducerId, button) {
+            $.ajax({
+                url: '/Producer/GetById',
+                type: 'GET',
+                data: { id: ProducerId },
+                success: (res) => {
+                    $('#modal').modal("show");
+                    $('#txtprofilePictureURL').val(res.profilePictureURL);
+                    $('#txtProducerName').val(res.fullName);
+                    $('#txtbio').val(res.bio);
+                    $('#imgPreview').attr('src', res.profilePictureURL).removeClass('d-none');
+                    $('#modalTitle').text("Update Producer");
+                    $('#btnSave').text("Update").off().click(() => {
+                        res.profilePictureURL = $('#txtprofilePictureURL').val();
+                        res.fullName = $('#txtProducerName').val();
+                        res.bio = $('#txtbio').val();
+
+                        $.ajax({
+                            url: '/Producer/Update',
+                            type: 'POST',
+                            data: res,
+                            success: (res) => {
+                               let row = $(button).parent().parent();
+                               DataTable.row(row).data(res).draw(false);
+                               $("#modal").modal("hide");
+                        }
+                        });
+                    });
+                }
+            });
+        }
+
+
+
+        function deleteProducer(ProducerId, button) {
+            if (confirm("Are you sure to delete this Producer?")) {
+                $.ajax({
+                    url: '/Producer/Delete',
+                    type: 'POST',
+                    data: { id: ProducerId },
+                    success: (res) => {
+                        let row = $(button).parent().parent();
+                        DataTable.row(row).remove().draw(false);
+                    }
+                });
+            }
+        }
+    </script>
+}
