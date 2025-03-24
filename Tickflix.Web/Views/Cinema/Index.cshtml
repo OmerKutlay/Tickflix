@@ -66,7 +66,7 @@
                 $("#imgPreview").attr("src", url).removeClass("d-none");
             } else {
                 $("#imgPreview").addClass("d-none");
-}
+            }
         });
 
         DataTable = $("#tblCinema").DataTable({
@@ -77,7 +77,7 @@
                 }},
                     { data: 'name', title: 'Name' },
                     { data: 'description', title: 'Description' },
-                {
+                    {
                         data: 'id', title: 'İşlemler', render: (data) => {
                             return `
                     <a class="btn btn-outline-primary" onclick="updateCinema(${data}, this)" title="Edit" href="#">
@@ -136,18 +136,37 @@
                         res.Name = $('#txtCinemaName').val();
                         res.Description = $('#txtDescription').val();
 
-                <td class="allign-middle">
-                    <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a> |
-                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details</a> |
-                    <a class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete</a>
-
-
-
-                </td>
+                        $.ajax({
+                            url: '/Cinema/Update',
+                            type: 'POST',
+                            data: res,
+                            success: (res) => {
+                               let row = $(button).parent().parent();
+                               DataTable.row(row).data(res).draw(false);
+                               $("#modal").modal("hide");
+                        }
+                        });
+                    });
                 }
-            </tbody>
-        </table>
+            });
+        }
 
-    </div>
 
-</div>
+
+        function deleteCinema(CinemaId, button) {
+            if (confirm("Are you sure to delete this Cinema?")) {
+                $.ajax({
+                    url: '/Cinema/Delete',
+                    type: 'POST',
+                    data: { id: CinemaId },
+                    success: (res) => {
+                        let row = $(button).parent().parent();
+                        DataTable.row(row).remove().draw(false);
+                    }
+                });
+            }
+        }
+
+
+    </script>
+}
