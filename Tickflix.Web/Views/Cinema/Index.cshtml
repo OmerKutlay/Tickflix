@@ -67,30 +67,74 @@
             } else {
                 $("#imgPreview").addClass("d-none");
 }
+        });
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.Logo)</th>
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.Description)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+        DataTable = $("#tblCinema").DataTable({
+                ajax: '/Cinema/GetAll',
+                columns: [
+                    { data: 'logo', title: 'Logo', "render": function(data) {
+                    return `<img src="${data}" class="img-thumbnail" style="width: 200px; height: 200px;" />`;
+                }},
+                    { data: 'name', title: 'Name' },
+                    { data: 'description', title: 'Description' },
                 {
-                <td class="allign-middle">
-                    <img class="rounded-circle" src="@item.Logo" alt="@item.Name" style="max-width: 150px" />
-                </td>
-                <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td class="allign-middle">
-                        @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                        data: 'id', title: 'İşlemler', render: (data) => {
+                            return `
+                    <a class="btn btn-outline-primary" onclick="updateCinema(${data}, this)" title="Edit" href="#">
+                        <i class="bi bi-pencil-square"></i>Edit</a>
+                     <a class="btn btn-outline-warning" onclick="detailCinema(${data}, this)" title="Details" href="#">
+                        <i class="bi bi-eye" font-size: 1.2em;"></i>Details</a>
+                    <a class="btn btn-outline-danger text-red" onclick="deleteCinema(${data}, this)" title="Delete" href="#">
+                        <i class="bi bi-trash"  font-size: 1.2em;"></i>Delete</a>`;
+                        }
+                    }
+                ]
+            });
+
+            $("#btnAdd").click(() => {
+                $("#modal").modal("show");
+                $("#btnSave").text("+Add");
+                $("#modalTitle").text("Add New Cinema");
+                $("#imgPreview").addClass("d-none");
+                $("#txtLogo").val('');
+                $("#txtName").val('');
+                $("#txtDescription").val('');
+
+                $("#btnSave").off().click(() => {
+                $.ajax({
+                url:'/Cinema/Add',
+                type: 'POST',
+                data: {
+                   Logo: $("#txtLogo").val(),
+                   Name: $("#txtName").val(),
+                   Description: $("#txtDescription").val()
+                },
+                success: (res) => {
+                    $("#modal").modal("hide");
+                    DataTable.row.add(res).draw(false);
+                }
+                });
+                });
+            });
+
+        });
+
+        function updateCinema(CinemaId, button) {
+            $.ajax({
+                url: '/Cinema/GetById',
+                type: 'GET',
+                data: { id: CinemaId },
+                success: (res) => {
+                    $('#modal').modal("show");
+                    $('#txtLogo').val(res.logo);
+                    $('#txtName').val(res.name);
+                    $('#txtDescription').val(res.Description);
+                    $('#imgPreview').attr('src', res.Logo).removeClass('d-none');
+                    $('#modalTitle').text("Update Cinema");
+                    $('#btnSave').text("Update").off().click(() => {
+                        res.Logo = $('#txtLogo').val();
+                        res.Name = $('#txtCinemaName').val();
+                        res.Description = $('#txtDescription').val();
 
                 <td class="allign-middle">
                     <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a> |
