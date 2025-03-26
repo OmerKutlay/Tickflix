@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tickflix.Business\Tickflix.Business.csproj" />
     <ProjectReference Include="..\Tickflix.Data\Tickflix.Data.csproj" />
     <ProjectReference Include="..\Tickflix.Models\Tickflix.Models.csproj" />
     <ProjectReference Include="..\Tickflix.Repository\Tickflix.Repository.csproj" />
