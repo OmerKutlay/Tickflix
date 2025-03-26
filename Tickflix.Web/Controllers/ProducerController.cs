@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tickflix.Business.Abstract;
 using Tickflix.Models;
-using Tickflix.Repository.Shared.Abstract;
 
 namespace Tickflix.Web.Controllers
 {
     public class ProducerController : Controller
     {
-        private readonly IRepository<Producer> _producerService;
+        private readonly IProducerService _producerService;
 
-        public ProducerController(IRepository<Producer> producerService)
+        public ProducerController(IProducerService producerService)
         {
             _producerService = producerService;
         }
