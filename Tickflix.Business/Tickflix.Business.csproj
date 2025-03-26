@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Tickflix.Models\Tickflix.Models.csproj" />
+    <ProjectReference Include="..\Tickflix.Repository\Tickflix.Repository.csproj" />
   </ItemGroup>
 
 </Project>
