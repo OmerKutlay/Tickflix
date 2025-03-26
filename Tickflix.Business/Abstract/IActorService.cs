@@ -12,7 +12,7 @@ namespace Tickflix.Business.Abstract
         Actor Add(Actor actor);
         Actor Update(Actor actor);
         Actor GetById(int id);
-        void Delete(int id);
+        void Delete(Actor actor);
         IQueryable<Actor> GetAll();
     }
 }
