@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Tickflix.Models;
-using Tickflix.Repository.Shared.Abstract;
+using Tickflix.Business.Abstract;
 
 
 namespace Tickflix.Web.Controllers
 {
     public class CinemaController : Controller
     {
-       private readonly IRepository<Cinema> _cinemaService;
+       private readonly ICinemaService _cinemaService;
 
-        public CinemaController(IRepository<Cinema> cinemaService)
+        public CinemaController(ICinemaService cinemaService)
         {
             _cinemaService = cinemaService;
         }
