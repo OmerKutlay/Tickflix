@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Tickflix.Repository.Configuration;
+using Tickflix.Business.Configuration;
 using Tickflix.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builde
 
 
 builder.Services.RepositoryDI();
+builder.Services.BusinessDI();
 
 
 
