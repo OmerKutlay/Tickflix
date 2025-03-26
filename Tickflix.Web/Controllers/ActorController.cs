@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Tickflix.Models;
-using Tickflix.Repository.Shared.Abstract;
+using Tickflix.Business.Abstract;
 
 namespace Tickflix.Web.Controllers
 {
     public class ActorController : Controller
     {
-        private readonly IRepository<Actor> _actorService;
+        private readonly IActorService _actorService;
 
-        public ActorController(IRepository<Actor> actorService)
+        public ActorController(IActorService actorService)
         {
             _actorService = actorService;
         }
