@@ -14,5 +14,8 @@ namespace Tickflix.Business.Abstract
         Movie GetById(int id);
         void Delete(Movie movie);
         IQueryable<Movie> GetAll();
+        //Movie Filter(string searchString);
+        List<Movie> GetFilteredMovies(string searchString);
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Tickflix.Business.Abstract;
 using Tickflix.Models;
 using Tickflix.Repository.Shared.Abstract;
@@ -32,7 +33,7 @@ namespace Tickflix.Business.Concrete
 
         public IQueryable<Movie> GetAll()
         {
-            return _movieRepository.GetAll();
+            return _movieRepository.GetAll().Include(m => m.Cinema).Include(m => m.Producer).Include(m => m.Actors);
         }
 
         public Movie GetById(int id)
@@ -44,5 +45,31 @@ namespace Tickflix.Business.Concrete
         {
             return _movieRepository.Update(movie);
         }
+
+
+        public List<Movie> GetFilteredMovies(string searchString)
+        {
+            var moviesQuery = _movieRepository.GetAll()
+                .Include(m => m.Cinema)
+                .Include(m => m.Producer)
+                .Include(m => m.Actors)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(searchString));
+            }
+
+            return moviesQuery.ToList();
+        }
+        //public Movie Filter(string searchString) 
+        //{
+        //    var allMovies =  _movieRepository.GetAll();
+
+        //        var filteredResultNew = allMovies.Where(n => string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+        //        return (View);
+
+        //}
     }
 }
