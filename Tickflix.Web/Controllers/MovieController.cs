@@ -13,9 +13,10 @@ namespace Tickflix.Web.Controllers
         {
             _movieService = movieService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
-            return View(_movieService.GetAll()); 
+            var movies = _movieService.GetFilteredMovies(searchString);
+            return View(movies);
         }
 
 
