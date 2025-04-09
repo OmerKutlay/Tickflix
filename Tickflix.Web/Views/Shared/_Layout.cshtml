@@ -44,10 +44,13 @@
                        </li>
                     </ul>
 
-                    <form class="d-flex my-2 my-lg-0" asp-controller="Movie" asp-action="Filter" style="padding-right: 25px;">
-                        <input name="searchString" type="text" class="form-control me-2" placeholder="Search for a movie..." aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    <form method="get" class="d-flex" asp-controller="Movie" asp-action="Index">
+                        <input name="searchString" class="form-control me-2" placeholder="Search for a movie...">
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
                     </form>
+    
 
 
                 </div>
