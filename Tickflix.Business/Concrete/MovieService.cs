@@ -62,14 +62,5 @@ namespace Tickflix.Business.Concrete
 
             return moviesQuery.ToList();
         }
-        //public Movie Filter(string searchString) 
-        //{
-        //    var allMovies =  _movieRepository.GetAll();
-
-        //        var filteredResultNew = allMovies.Where(n => string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
-
-        //        return (View);
-
-        //}
     }
 }
