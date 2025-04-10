@@ -155,3 +155,92 @@
                     <select id="ddlActors" class="form-select" multiple required></select>
     </div>
 </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnSaveMovie" class="btn btn-primary">+ Add Movie</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
+    <a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+
+</div>
+
+
+@section Scripts {
+    <script>
+                $(document).ready(() => {
+                            // Örnek veri çekme (sen kendi controller'dan çekebilirsin)
+        $.get('/Movie/GetFormOptions', function (data) {
+            // Cinemas
+            $("#ddlCinema").empty();
+            data.cinemas.forEach(c => {
+                $("#ddlCinema").append(new Option(c.text, c.value));
+            });
+
+            // Producers
+            $("#ddlProducer").empty();
+            data.producers.forEach(p => {
+                $("#ddlProducer").append(new Option(p.text, p.value));
+            });
+
+            // Actors
+            $("#ddlActors").empty();
+            data.actors.forEach(a => {
+                $("#ddlActors").append(new Option(a.text, a.value));
+            });
+        });
+
+
+           
+                   $("#btnAdd").click(() => {
+                $("#modal").modal("show");
+                $("#btnSaveMovie").text("+ Add Movie");
+                $("#modalTitle").text("Add New Movie");
+
+                // Form temizliği
+                $("#txtMovieName").val('');
+                $("#txtDescription").val('');
+                $("#txtImageURL").val('');
+                $("#txtPrice").val('');
+                $("#txtStartDate").val('');
+                $("#txtEndDate").val('');
+                $("#ddlCategory").val('');
+                $("#txtCinemaId").val('');
+                $("#txtProducerId").val('');
+                $("#txtdllActors").val('');
+
+                $("#btnSaveMovie").off().click(() => {
+                    $.ajax({
+                        url: '/Movie/Add',
+                        type: 'POST',
+                        data: {
+                            Name: $("#txtMovieName").val(),
+                            Description: $("#txtDescription").val(),
+                            ImageURL: $("#txtImageURL").val(),
+                            Price: parseFloat($("#txtPrice").val()),
+                            StartDate: $("#txtStartDate").val(),
+                            EndDate: $("#txtEndDate").val(),
+                            MovieCategory: $("#ddlCategory").val(),
+                            CinemaId: parseInt($("#txtCinemaId").val()),
+                            ProducerId: parseInt($("#txtProducerId").val()),
+                                ActorIds: $("#ddlActors").val()
+                        },
+                        success: (res) => {
+                            $("#modal").modal("hide");
+                            location.reload();
+                        },
+                        error: (err) => {
+                            alert("Something went wrong. Please check the values.");
+                        }
+                    });
+                });
+            });
+        });
+
+    </script>
+}
+
+                                }
