@@ -91,3 +91,42 @@
         </div>
     </div>
 </div>
+
+@* MODAL *@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="text-center">
+                <img id="imgPreview" src="" class="img-thumbnail d-none" style="width: 200px; height: 200px;" />
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Movie Name:</label>
+                    <input type="text" id="txtMovieName" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description:</label>
+                    <textarea id="txtDescription" class="form-control" rows="3" required></textarea>
+            </div>
+                <div class="mb-3">
+                    <label class="form-label">Image URL:</label>
+                    <input type="text" id="txtImageURL" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Price:</label>
+                    <input type="number" id="txtPrice" step="0.01" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Start Date:</label>
+                    <input type="date" id="txtStartDate" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">End Date:</label>
+                    <input type="date" id="txtEndDate" class="form-control" required />
+        </div>
+    </div>
+</div>
