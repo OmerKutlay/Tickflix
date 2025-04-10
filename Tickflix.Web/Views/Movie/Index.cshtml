@@ -128,5 +128,30 @@
                     <label class="form-label">End Date:</label>
                     <input type="date" id="txtEndDate" class="form-control" required />
         </div>
+                <div class="mb-3">
+                    <label class="form-label">Category:</label>
+                    <select id="ddlCategory" class="form-select" required>
+                        @foreach (var category in Enum.GetValues(typeof(MovieCategory)))
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>
+                <!-- Cinema Dropdown -->
+                <div class="mb-3">
+                    <label class="form-label">Cinema:</label>
+                    <select id="ddlCinema" class="form-select" required></select>
+                </div>
+
+                <!-- Producer Dropdown -->
+                <div class="mb-3">
+                    <label class="form-label">Producer:</label>
+                    <select id="ddlProducer" class="form-select" required></select>
+                </div>
+
+                <!-- Actors Multi-Select -->
+                <div class="mb-3">
+                    <label class="form-label">Actors:</label>
+                    <select id="ddlActors" class="form-select" multiple required></select>
     </div>
 </div>
