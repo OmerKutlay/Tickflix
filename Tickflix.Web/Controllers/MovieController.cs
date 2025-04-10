@@ -48,11 +48,12 @@ namespace Tickflix.Web.Controllers
             return Ok();
         }
 
-        public IActionResult Filter(string searchString)
-        {
-            var filteredMovies = _movieService.GetFilteredMovies(searchString);
-            return View("Index", filteredMovies); // Arama sonuçlarını Index.cshtml'e gönderiyoruz
-        }
+        //[HttpPost]
+        //public IActionResult Filter(string searchString)
+        //{
+        //    var filteredMovies = _movieService.GetFilteredMovies(searchString);
+        //    return View("Index", filteredMovies);
+        //}
     }
 
 }
