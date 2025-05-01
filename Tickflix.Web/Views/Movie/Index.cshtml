@@ -251,6 +251,28 @@
             });
         });
 
+
+
+
+
+
+                function fillCinemas() {
+            $.ajax({
+                url: '/Cinema/GetAll',
+                type: 'GET',
+                success: (res) => {
+                    $("#ddlCinema").empty();
+                    res.data.forEach(item => {
+                        $("#ddlCinema").append(new Option(item.name, item.id));
+                    });
+                },
+                error: () => {
+                    alert("Sinema bilgileri alınamadı.");
+                }
+                });
+            });
+        });
+
     </script>
 }
 
