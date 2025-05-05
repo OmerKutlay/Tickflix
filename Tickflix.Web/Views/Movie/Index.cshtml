@@ -3,293 +3,321 @@
 @model IEnumerable<Movie>
 
 @{
-    ViewData["Title"] = "Movies";
+	ViewData["Title"] = "Movies";
 }
 
 <div class="row">
-    <div class="col-12">
-        <div class="card shadow">
-           @*  <div class="card-header bg-gradient bg-warning text-white">
+	<div class="col-12">
+		<div class="card shadow">
+			@*  <div class="card-header bg-gradient bg-warning text-white">
                 <div class="row align-items-center">
                     <div class="col-11 fs-3">
                         <i class="bi bi-film me-2"></i> Movies
                     </div>
-                   
+
                 </div>
             </div> *@
-            <div class="card-body">
-                <div class="row">
-                    @if (Model != null)
-                    {
-                        foreach (var item in Model)
-                        {
-                            <div class="col-md-4 col-xs-6 border-primary mb-3">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row g-0">
-                                        <div class="col-md-6">
-                                            <img src="@item.ImageURL" class="img-fluid rounded-start" alt="@item.Name" style="height: 100%; object-fit: cover;" />
-                                        </div>
+			<div class="card-body">
+				<div class="row">
+					@if (Model != null)
+					{
+						foreach (var item in Model)
+						{
+							<div class="col-md-4 col-xs-6 border-primary mb-3">
+								<div class="card mb-3" style="max-width: 540px;">
+									<div class="row g-0">
+										<div class="col-md-6">
+											<img src="@item.ImageURL" class="img-fluid rounded-start" alt="@item.Name" style="height: 100%; object-fit: cover;" />
+										</div>
 
-                                        <div class="col-md-6 d-flex flex-column justify-content-between">
-                                            <h5 class="card-header bg-gradient bg-primary text-white d-flex justify-content-between align-items-center" style="border-top-left-radius: 0; border-top-right-radius: 0;">
-                                                <span>@item.Name</span>
-                                                <a class="btn text-white p-0" asp-controller="Movie" asp-action="Update" title="Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                            </h5>
+										<div class="col-md-6 d-flex flex-column justify-content-between">
+											<h5 class="card-header bg-gradient bg-primary text-white d-flex justify-content-between align-items-center" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+												<span>@item.Name</span>
+												<a class="btn text-white p-0" asp-controller="Movie" asp-action="Update" title="Edit">
+													<i class="bi bi-pencil-square"></i>
+												</a>
+											</h5>
 
-                                            <div class="card-body">
-                                               
-                                                <p class="card-text">@item.Description</p>
-                                                <p class="card-text"><strong>Cinema:</strong> @item.Cinema?.Name</p>
-                                                <p class="card-text"><strong>Category:</strong> @item.MovieCategory</p>
-                                                <p class="card-text"><strong>Start:</strong> @item.StartDate.ToString("dd MMM yy")</p>
-                                                <p class="card-text"><strong>End:</strong> @item.EndDate.ToString("dd MMM yy")</p>
-                                                <p>
-                                                    <strong>Status:</strong>
-                                                    @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
-                                                    {
-                                                        <span class="badge bg-success">AVAILABLE</span>
-                                                    }
-                                                    else if (DateTime.Now > item.EndDate)
-                                                    {
-                                                        <span class="badge bg-danger">EXPIRED</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="badge bg-primary">UPCOMING</span>
-                                                    }
-                                                </p>
-                                            </div>
-                                            <div class="card-footer d-flex justify-content-between align-items-center bg-white border-0">
-                                                <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">
-                                                    <i class="bi bi-eye-fill"></i> Details
-                                                </a>
-                                                <a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")"
-                                                   asp-controller="Orders"
-                                                   asp-action="AddItemToShoppingCart"
-                                                   asp-route-id="@item.Id">
-                                                    <i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+											<div class="card-body">
 
-                        }
-                    }
-                    else
-                    {
-                        <p>No movies to display.</p>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
+												<p class="card-text">@item.Description</p>
+												<p class="card-text"><strong>Cinema:</strong> @item.Cinema?.Name</p>
+												<p class="card-text"><strong>Category:</strong> @item.MovieCategory</p>
+												<p class="card-text"><strong>Start:</strong> @item.StartDate.ToString("dd MMM yy")</p>
+												<p class="card-text"><strong>End:</strong> @item.EndDate.ToString("dd MMM yy")</p>
+												<p>
+													<strong>Status:</strong>
+													@if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+													{
+														<span class="badge bg-success">AVAILABLE</span>
+													}
+													else if (DateTime.Now > item.EndDate)
+													{
+														<span class="badge bg-danger">EXPIRED</span>
+													}
+													else
+													{
+														<span class="badge bg-primary">UPCOMING</span>
+													}
+												</p>
+											</div>
+											<div class="card-footer d-flex justify-content-between align-items-center bg-white border-0">
+												<a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">
+													<i class="bi bi-eye-fill"></i> Details
+												</a>
+												<a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")"
+												   asp-controller="Orders"
+												   asp-action="AddItemToShoppingCart"
+												   asp-route-id="@item.Id">
+													<i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						}
+					}
+					else
+					{
+						<p>No movies to display.</p>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 @* MODAL *@
 <div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="text-center">
-                <img id="imgPreview" src="" class="img-thumbnail d-none" style="width: 200px; height: 200px;" />
-            </div>
-            <div class="modal-body">
+	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitle"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="text-center">
+				<img id="imgPreview" src="" class="img-thumbnail d-none" style="width: 200px; height: 200px;" />
+			</div>
+			<div class="modal-body">
 
-                <div class="mb-3">
-                    <label class="form-label">Image URL:</label>
-                    <input type="text" id="txtImageURL" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Movie Name:</label>
-                    <input type="text" id="txtMovieName" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description:</label>
-                    <textarea id="txtDescription" class="form-control" rows="3" required></textarea>
-                </div>
-               
-                <div class="mb-3">
-                    <label class="form-label">Price:</label>
-                    <input type="number" id="txtPrice" step="0.01" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Start Date:</label>
-                    <input type="date" id="txtStartDate" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">End Date:</label>
-                    <input type="date" id="txtEndDate" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Category:</label>
-                    <select id="ddlCategory" class="form-select" required>
-                        @foreach (var category in Enum.GetValues(typeof(MovieCategory)))
-                        {
-                            <option value="@category">@category</option>
-                        }
-                    </select>
-                </div>
-                <!-- Cinema Dropdown -->
-                <div class="mb-3">
-                    <label class="form-label">Cinema:</label>
-                    <select id="ddlCinema" class="form-select" required></select>
-                </div>
+				<div class="mb-3">
+					<label class="form-label">Image URL:</label>
+					<input type="text" id="txtImageURL" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Movie Name:</label>
+					<input type="text" id="txtMovieName" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Description:</label>
+					<textarea id="txtDescription" class="form-control" rows="3" required></textarea>
+				</div>
 
-                <!-- Producer Dropdown -->
-                <div class="mb-3">
-                    <label class="form-label">Producer:</label>
-                    <select id="ddlProducer" class="form-select" required></select>
-                </div>
+				<div class="mb-3">
+					<label class="form-label">Price:</label>
+					<input type="number" id="txtPrice" step="0.01" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Start Date:</label>
+					<input type="date" id="txtStartDate" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">End Date:</label>
+					<input type="date" id="txtEndDate" class="form-control" required />
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Category:</label>
+					<select id="ddlCategory" class="form-select" required>
+						@foreach (var category in Enum.GetValues(typeof(MovieCategory)))
+						{
+							<option value="@category">@category</option>
+						}
+					</select>
+				</div>
+				<!-- Cinema Dropdown -->
+				<div class="mb-3">
+					<label class="form-label">Cinema:</label>
+					<select id="ddlCinema" class="form-select" required></select>
+				</div>
 
-                <!-- Actors Multi-Select -->
-                <div class="mb-3">
-                    <label class="form-label">Actors:</label>
-                    <select id="ddlActors" class="form-select" multiple required></select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="btnSaveMovie" class="btn btn-primary">+ Add Movie</button>
-            </div>
-        </div>
-    </div>
+				<!-- Producer Dropdown -->
+				<div class="mb-3">
+					<label class="form-label">Producer:</label>
+					<select id="ddlProducer" class="form-select" required></select>
+				</div>
+
+				@* <!-- Actors Multi-Select -->
+				<div class="mb-3">
+					<label class="form-label">Actors:</label>
+					<select id="ddlActors" class="form-select" multiple required></select>
+				</div> *@
+
+				<!-- Actors Multi-Select -->
+				<div class="mb-3">
+					<label class="form-label">Actors:</label>
+					<select class="form-multi-select" id="ddlActors" name="ActorIds" multiple required>
+						@* Option’ları JS ile dolduracağız *@
+					</select>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" id="btnSaveMovie" class="btn btn-primary">+ Add Movie</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
-    <a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+	<a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
 
 </div>
 
 
 @section Scripts {
-    <script>
-                $(document).ready(() => {
+	<script>
+				$(document).ready(() => {
 
-                    $("#txtImageURL").on("input", function() {
-            var url = $(this).val();
-            if (url) {
-                $("#imgPreview").attr("src", url).removeClass("d-none");
-            } else {
-                $("#imgPreview").addClass("d-none");
-            }
-        });
+					$("#txtImageURL").on("input", function() {
+			var url = $(this).val();
+			if (url) {
+				$("#imgPreview").attr("src", url).removeClass("d-none");
+			} else {
+				$("#imgPreview").addClass("d-none");
+			}
+		});
 
-        fillCinemas();
-        fillProducers();
-                          
-        $.get('/Movie/GetFormOptions', function (data) {
-            // Cinemas
-            $("#ddlCinema").empty();
-            data.cinemas.forEach(c => {
-                $("#ddlCinema").append(new Option(c.text, c.value));
-            });
+		fillCinemas();
+		fillProducers();
+		fillActors();
 
-            // Producers
-            $("#ddlProducer").empty();
-            data.producers.forEach(p => {
-                $("#ddlProducer").append(new Option(p.text, p.value));
-            });
+		$.get('/Movie/GetFormOptions', function (data) {
+			// Cinemas
+			$("#ddlCinema").empty();
+			data.cinemas.forEach(c => {
+				$("#ddlCinema").append(new Option(c.text, c.value));
+			});
 
-            // Actors
-            $("#ddlActors").empty();
-            data.actors.forEach(a => {
-                $("#ddlActors").append(new Option(a.text, a.value));
-            });
-        });
+			// Producers
+			$("#ddlProducer").empty();
+			data.producers.forEach(p => {
+				$("#ddlProducer").append(new Option(p.text, p.value));
+			});
 
-
-           
-                   $("#btnAdd").click(() => {
-                $("#modal").modal("show");
-                $("#btnSaveMovie").text("+ Add Movie");
-                $("#modalTitle").text("Add New Movie");
-
-                // Form temizliği
-                $("#txtMovieName").val('');
-                $("#txtDescription").val('');
-                $("#txtImageURL").val('');
-                $("#imgPreview").addClass("d-none");
-                $("#txtPrice").val('');
-                $("#txtStartDate").val('');
-                $("#txtEndDate").val('');
-                $("#ddlCategory").val('');
-                $("#txtCinemaId").val('');
-                $("#txtProducerId").val('');
-                $("#txtdllActors").val('');
-
-                $("#btnSaveMovie").off().click(() => {
-                    $.ajax({
-                        url: '/Movie/Add',
-                        type: 'POST',
-                        data: {
-                            Name: $("#txtMovieName").val(),
-                            Description: $("#txtDescription").val(),
-                            ImageURL: $("#txtImageURL").val(),
-                            Price: parseFloat($("#txtPrice").val()),
-                            StartDate: $("#txtStartDate").val(),
-                            EndDate: $("#txtEndDate").val(),
-                            MovieCategory: $("#ddlCategory").val(),
-                            CinemaId: parseInt($("#txtCinemaId").val()),
-                            ProducerId: parseInt($("#txtProducerId").val()),
-                                ActorIds: $("#ddlActors").val()
-                        },
-                        success: (res) => {
-                            $("#modal").modal("hide");
-                            location.reload();
-                        },
-                        error: (err) => {
-                            alert("Something went wrong. Please check the values.");
-                        }
-                    });
-                });
-            });
-        });
+			// Actors
+			$("#ddlActors").empty();
+			data.actors.forEach(a => {
+				$("#ddlActors").append(new Option(a.text, a.value));
+			});
+		});
 
 
 
+				   $("#btnAdd").click(() => {
+				$("#modal").modal("show");
+				$("#btnSaveMovie").text("+ Add Movie");
+				$("#modalTitle").text("Add New Movie");
 
+				// Form temizliği
+				$("#txtMovieName").val('');
+				$("#txtDescription").val('');
+				$("#txtImageURL").val('');
+				$("#imgPreview").addClass("d-none");
+				$("#txtPrice").val('');
+				$("#txtStartDate").val('');
+				$("#txtEndDate").val('');
+				$("#ddlCategory").val('');
+				$("#txtCinemaId").val('');
+				$("#txtProducerId").val('');
+				$("#txtdllActors").val('');
 
-
-                function fillCinemas() {
-            $.ajax({
-                url: '/Cinema/GetAll',
-                type: 'GET',
-                success: (res) => {
-                    $("#ddlCinema").empty();
-                    res.data.forEach(item => {
-                        $("#ddlCinema").append(new Option(item.name, item.id));
-                    });
-                },
-                error: () => {
-                    alert("Sinema bilgileri alınamadı.");
-                }
-            });
-        }
-
-        function fillProducers(){
-            $.ajax({
-                url: '/Producer/GetAll',
-                type:'GET',
-                success: (res) => {
-                    $('#ddlProducer').empty();
-                    res.data.forEach(item => {
-                        $('#ddlProducer').append(new Option(item.fullName, item.id));
-                    });
-                }
-            });
-        }
+				$("#btnSaveMovie").off().click(() => {
+					$.ajax({
+						url: '/Movie/Add',
+						type: 'POST',
+						data: {
+							Name: $("#txtMovieName").val(),
+							Description: $("#txtDescription").val(),
+							ImageURL: $("#txtImageURL").val(),
+							Price: parseFloat($("#txtPrice").val()),
+							StartDate: $("#txtStartDate").val(),
+							EndDate: $("#txtEndDate").val(),
+							MovieCategory: $("#ddlCategory").val(),
+							CinemaId: parseInt($("#txtCinemaId").val()),
+							ProducerId: parseInt($("#txtProducerId").val()),
+								ActorIds: $("#ddlActors").val()
+						},
+						success: (res) => {
+							$("#modal").modal("hide");
+							location.reload();
+						},
+						error: (err) => {
+							alert("Something went wrong. Please check the values.");
+						}
+					});
+				});
+			});
+		});
 
 
 
 
-    </script>
+
+
+				function fillCinemas() {
+			$.ajax({
+				url: '/Cinema/GetAll',
+				type: 'GET',
+				success: (res) => {
+					$("#ddlCinema").empty();
+					res.data.forEach(item => {
+						$("#ddlCinema").append(new Option(item.name, item.id));
+					});
+				},
+				error: () => {
+					alert("Sinema bilgileri alınamadı.");
+				}
+			});
+		}
+
+		function fillProducers(){
+			$.ajax({
+				url: '/Producer/GetAll',
+				type:'GET',
+				success: (res) => {
+					$('#ddlProducer').empty();
+					res.data.forEach(item => {
+						$('#ddlProducer').append(new Option(item.fullName, item.id));
+					});
+				}
+			});
+		}
+
+
+
+
+
+
+
+		function fillActors(){
+			$.ajax({
+				url: '/Actor/GetAll',
+				type: 'GET',
+				success: (res) => {
+					$('#ddlActors').empty();
+					res.data.forEach(item => {
+						$('#ddlActors').append(new Option(item.fullName, item.id));
+					});
+				}
+			});
+		}
+
+
+
+	</script>
 }
 
-                                }
+								}
