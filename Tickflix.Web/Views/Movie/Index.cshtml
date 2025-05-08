@@ -148,13 +148,7 @@
 					<select id="ddlProducer" class="form-select" required></select>
 				</div>
 
-				@* <!-- Actors Multi-Select -->
-				<div class="mb-3">
-					<label class="form-label">Actors:</label>
-					<select id="ddlActors" class="form-select" multiple required></select>
-				</div> *@
 
-				<!-- Actors Multi-Select -->
 				<div class="mb-3">
 					<label class="form-label" style="font-weight: 600; margin-bottom: 4px;">Actors:</label>
 
@@ -165,7 +159,7 @@
 					<div id="actorCheckboxList"
 						 style="height: 200px; width: 100%; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px; padding: 8px;">
 
-				</div>
+					</div>
 				</div>
 
 
@@ -310,6 +304,7 @@
 
 		let selectedActorIds = [];
 
+				let allActors = [];
 
 		function fillActors() {
 			$.ajax({
@@ -349,8 +344,8 @@
 				} else {
 					selectedActorIds = selectedActorIds.filter(id => id !== actorId);
 				}
-					});
-				}
+			});
+		}
 
 
 
@@ -360,7 +355,7 @@
 				actor.fullName.toLowerCase().includes(keyword)
 			);
 			renderActors(filtered);
-			});
+		});
 
 
 				$('#actorSearch').on('input', function () {
@@ -373,7 +368,7 @@
 					actor.fullName.toLowerCase().includes(keyword)
 				);
 				renderActors(filtered);
-		}
+			}
 		});
 
 
