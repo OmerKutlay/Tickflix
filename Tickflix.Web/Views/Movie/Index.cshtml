@@ -183,7 +183,7 @@
 </div>
 
 <div style="position: fixed; right:50px; bottom: 25px;" class="text-white">
-	<a id="btnAdd" href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New</a>
+	<a id="btnAdd" href="#" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add New</a>
 
 </div>
 
@@ -257,9 +257,9 @@
 							StartDate: $("#txtStartDate").val(),
 							EndDate: $("#txtEndDate").val(),
 							MovieCategory: $("#ddlCategory").val(),
-							CinemaId: parseInt($("#txtCinemaId").val()),
-							ProducerId: parseInt($("#txtProducerId").val()),
-								ActorIds: $("#ddlActors").val()
+									CinemaId: parseInt($("#ddlCinema").val()),
+		ProducerId: parseInt($("#ddlProducer").val()),
+		ActorIds: selectedActorIds
 						},
 						success: (res) => {
 							$("#modal").modal("hide");
