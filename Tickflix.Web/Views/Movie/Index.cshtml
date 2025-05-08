@@ -156,11 +156,22 @@
 
 				<!-- Actors Multi-Select -->
 				<div class="mb-3">
-					<label class="form-label">Actors:</label>
-					<select class="form-multi-select" id="ddlActors" name="ActorIds" multiple required>
-						@* Option’ları JS ile dolduracağız *@
-					</select>
+					<label class="form-label" style="font-weight: 600; margin-bottom: 4px;">Actors:</label>
+
+					<input type="text" id="actorSearch" placeholder="🔍Search actors..."
+						   style="width: 100%; padding: 6px 12px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 8px;">
+
+
+					<div id="actorCheckboxList"
+						 style="height: 200px; width: 100%; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px; padding: 8px;">
+
 				</div>
+				</div>
+
+
+
+
+
 
 			</div>
 			<div class="modal-footer">
