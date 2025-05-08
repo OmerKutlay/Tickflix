@@ -361,11 +361,24 @@
 			);
 			renderActors(filtered);
 			});
+
+
+				$('#actorSearch').on('input', function () {
+			const keyword = $(this).val().toLowerCase();
+
+			if (keyword === '') {
+				renderActors(allActors); // tümünü göster
+			} else {
+				const filtered = allActors.filter(actor =>
+					actor.fullName.toLowerCase().includes(keyword)
+				);
+				renderActors(filtered);
 		}
+		});
 
 
 
 	</script>
 }
 
-								}
+								
