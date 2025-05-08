@@ -308,19 +308,47 @@
 		}
 
 
+		let selectedActorIds = [];
 
 
-
-
-
-		function fillActors(){
+		function fillActors() {
 			$.ajax({
 				url: '/Actor/GetAll',
 				type: 'GET',
 				success: (res) => {
-					$('#ddlActors').empty();
-					res.data.forEach(item => {
-						$('#ddlActors').append(new Option(item.fullName, item.id));
+					allActors = res.data;
+					renderActors(allActors);
+				}
+			});
+		}
+
+						function renderActors(actors) {
+			const container = $('#actorCheckboxList');
+			container.empty();
+
+			actors.forEach(item => {
+				const isChecked = selectedActorIds.includes(item.id);
+				const checkboxHtml = `
+					<div style="padding: 6px 8px; margin-bottom: 4px; border-radius: 4px; transition: background-color 0.2s;"
+						onmouseover="this.style.backgroundColor='#eef7ff'"
+						onmouseout="this.style.backgroundColor='transparent'">
+						<input type="checkbox" name="ActorIds" value="${item.id}" id="actor${item.id}" ${isChecked ? "checked" : ""} style="margin-right: 6px;">
+						<label for="actor${item.id}">${item.fullName}</label>
+					</div>
+				`;
+				container.append(checkboxHtml);
+			});
+
+			// Yeniden çizimden sonra checkbox event'lerini bağla
+			$('input[name="ActorIds"]').on('change', function () {
+				const actorId = parseInt($(this).val());
+				if ($(this).is(':checked')) {
+					if (!selectedActorIds.includes(actorId)) {
+						selectedActorIds.push(actorId);
+					}
+				} else {
+					selectedActorIds = selectedActorIds.filter(id => id !== actorId);
+				}
 					});
 				}
 			});
