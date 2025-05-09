@@ -14,15 +14,20 @@ namespace Tickflix.Business.Concrete
     public class MovieService : IMovieService
     {
         private readonly IRepository<Movie> _movieRepository;
+        private readonly IRepository<Actor> _actorRepository;
 
-        public MovieService(IRepository<Movie> movieRepository)
+        public MovieService(IRepository<Movie> movieRepository, IRepository<Actor> actorRepository)
         {
             _movieRepository = movieRepository;
+            _actorRepository = actorRepository;
         }
 
 
-        public Movie Add(Movie movie)
+        public Movie Add(Movie movie, List<int> selectedActorsIds)
         {
+            var actorEntities = _actorRepository.GetAll()
+                .Where(a => selectedActorsIds.Contains(a.Id)).ToList();
+            movie.Actors = actorEntities;
             return _movieRepository.Add(movie);
         }
 
