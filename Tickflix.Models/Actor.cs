@@ -16,6 +16,6 @@ namespace Tickflix.Models
         public string ProfilePictureURL { get; set; }
         [Display(Name = "Biography")]
         public string Bio { get; set; }
-        public ICollection<Movie> Movies { get; set; }
+        public ICollection<Movie> Movies { get; set; } = new List<Movie>();
     }
 }
