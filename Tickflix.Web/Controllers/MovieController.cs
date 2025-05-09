@@ -27,9 +27,9 @@ namespace Tickflix.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Movie movie)
+        public IActionResult Add(Movie movie, List<int> selectedActorsIds)
         {
-            return Ok(_movieService.Add(movie));
+            return Ok(_movieService.Add(movie, selectedActorsIds));
         }
         [HttpGet]
         public IActionResult GetById(int id)
