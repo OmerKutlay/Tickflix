@@ -22,7 +22,7 @@ namespace Tickflix.Models
         public virtual Cinema Cinema { get; set; }
         public int ProducerId { get; set; }
         public virtual Producer Producer { get; set; }
-        public ICollection<Actor> Actors { get; set; }
+        public ICollection<Actor> Actors { get; set; } = new List<Actor>();
         
     }
 }
