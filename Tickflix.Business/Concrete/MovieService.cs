@@ -23,11 +23,12 @@ namespace Tickflix.Business.Concrete
         }
 
 
-        public Movie Add(Movie movie, List<int> selectedActorsIds)
+        public Movie Add(Movie movie, List<int> Actors)
         {
             var actorEntities = _actorRepository.GetAll()
-                .Where(a => selectedActorsIds.Contains(a.Id)).ToList();
+                .Where(a => Actors.Contains(a.Id)).ToList();
             movie.Actors = actorEntities;
+            _movieRepository.Save();
             return _movieRepository.Add(movie);
         }
 
