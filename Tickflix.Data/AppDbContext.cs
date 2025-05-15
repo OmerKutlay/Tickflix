@@ -18,5 +18,16 @@ namespace Tickflix.Web
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Producer> Producers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Movie>()
+                .HasMany(m => m.Actors)
+                .WithMany(a => a.Movies)
+                .UsingEntity(j => j.ToTable("ActorMovie")); 
+        }
+
     }
 }

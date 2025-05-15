@@ -34,7 +34,7 @@ namespace Tickflix.Data.Migrations
 
                     b.HasIndex("MoviesId");
 
-                    b.ToTable("ActorMovie");
+                    b.ToTable("ActorMovie", (string)null);
                 });
 
             modelBuilder.Entity("Tickflix.Models.Actor", b =>
