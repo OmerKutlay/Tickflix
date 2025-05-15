@@ -27,9 +27,9 @@ namespace Tickflix.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Movie movie, List<int> selectedActorsIds)
+        public IActionResult Add(Movie movie, List<int> Actors)
         {
-            return Ok(_movieService.Add(movie, selectedActorsIds));
+            return Ok(_movieService.Add(movie, Actors));
         }
         [HttpGet]
         public IActionResult GetById(int id)
@@ -47,13 +47,6 @@ namespace Tickflix.Web.Controllers
             _movieService.Delete(movie);
             return Ok();
         }
-
-        //[HttpPost]
-        //public IActionResult Filter(string searchString)
-        //{
-        //    var filteredMovies = _movieService.GetFilteredMovies(searchString);
-        //    return View("Index", filteredMovies);
-        //}
     }
 
 }
