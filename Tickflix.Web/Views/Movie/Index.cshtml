@@ -199,7 +199,7 @@
 		fillProducers();
 		fillActors();
 
-				   $("#btnAdd").click(() => {
+		   $("#btnAdd").click(() => {
 				$("#modal").modal("show");
 				$("#btnSaveMovie").text("+ Add Movie");
 				$("#modalTitle").text("Add New Movie");
@@ -236,14 +236,10 @@
 					}).get()
 				}
 			}).always(() => {
-							$("#modal").modal("hide");
-							location.reload();
-						},
-						error: (err) => {
-							alert("Something went wrong. Please check the values.");
-						}
-					});
-				});
+				$("#modal").modal("hide");
+				location.reload();
+			});
+		});
 			});
 		});
 
@@ -282,14 +278,12 @@
 		}
 
 
-		let selectedActorIds = [];
-
-				let allActors = [];
 
 
 
 
-		function fillActors() {
+
+			function fillActors() {
 			$.ajax({
 				url: '/Actor/GetAll',
 				type: 'GET',
@@ -339,48 +333,32 @@
 					>
 						${actor.fullName}
 					</label>
-					</div>
-				`;
+				</div>
+			`;
 			$("#actorCheckboxList").append(checkbox);
-			});
+		});
 
-			// Yeniden çizimden sonra checkbox event'lerini bağla
-			$('input[name="ActorIds"]').on('change', function () {
-				const actorId = parseInt($(this).val());
-				if ($(this).is(':checked')) {
-					if (!selectedActorIds.includes(actorId)) {
-						selectedActorIds.push(actorId);
-					}
-				} else {
-					selectedActorIds = selectedActorIds.filter(id => id !== actorId);
+
+					// Arama kutusuna filtre işlevi bağla
+					$("#actorSearch").on("input", function () {
+						const query = $(this).val().toLowerCase();
+						$(".actor-item").each(function () {
+							const name = $(this).data("name");
+							if (name.includes(query)) {
+								$(this).show();
+							} else {
+								$(this).hide();
+							}
+						});
+					});
+				},
+				error: () => {
+					alert("Aktör bilgileri alınamadı.");
 				}
 			});
 		}
 
-
-
-		$('#actorSearch').on('input', function () {
-			const keyword = $(this).val().toLowerCase();
-			const filtered = allActors.filter(actor =>
-				actor.fullName.toLowerCase().includes(keyword)
-			);
-			renderActors(filtered);
-		});
-
-
-				$('#actorSearch').on('input', function () {
-			const keyword = $(this).val().toLowerCase();
-
-			if (keyword === '') {
-				renderActors(allActors); // tümünü göster
-			} else {
-				const filtered = allActors.filter(actor =>
-					actor.fullName.toLowerCase().includes(keyword)
-				);
-				renderActors(filtered);
-			}
-		});
-
+		
 
 
 	</script>
