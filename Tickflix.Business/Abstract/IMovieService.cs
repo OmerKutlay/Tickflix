@@ -9,7 +9,7 @@ namespace Tickflix.Business.Abstract
 {
     public interface IMovieService
     {
-        Movie Add(Movie movie, List<int> selectedActorsIds);
+        Movie Add(Movie movie, List<int> Actors);
         Movie Update(Movie movie);
         Movie GetById(int id);
         void Delete(Movie movie);
