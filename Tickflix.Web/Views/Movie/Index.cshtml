@@ -231,9 +231,11 @@
 							MovieCategory: $("#ddlCategory").val(),
 									CinemaId: parseInt($("#ddlCinema").val()),
 		ProducerId: parseInt($("#ddlProducer").val()),
-		ActorIds: selectedActorIds
-						},
-						success: (res) => {
+						Actors: $("#actorCheckboxList input:checked").map(function () {
+						return $(this).val();
+					}).get()
+				}
+			}).always(() => {
 							$("#modal").modal("hide");
 							location.reload();
 						},
