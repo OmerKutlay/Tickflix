@@ -199,28 +199,6 @@
 		fillProducers();
 		fillActors();
 
-		$.get('/Movie/GetFormOptions', function (data) {
-			// Cinemas
-			$("#ddlCinema").empty();
-			data.cinemas.forEach(c => {
-				$("#ddlCinema").append(new Option(c.text, c.value));
-			});
-
-			// Producers
-			$("#ddlProducer").empty();
-			data.producers.forEach(p => {
-				$("#ddlProducer").append(new Option(p.text, p.value));
-			});
-
-			// Actors
-			$("#ddlActors").empty();
-			data.actors.forEach(a => {
-				$("#ddlActors").append(new Option(a.text, a.value));
-			});
-		});
-
-
-
 				   $("#btnAdd").click(() => {
 				$("#modal").modal("show");
 				$("#btnSaveMovie").text("+ Add Movie");
