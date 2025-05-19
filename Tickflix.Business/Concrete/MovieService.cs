@@ -44,7 +44,12 @@ namespace Tickflix.Business.Concrete
 
         public Movie GetById(int id)
         {
-            return _movieRepository.GetById(id);
+            var movie = _movieRepository.GetAll()
+                .Include(m => m.Cinema)
+                .Include(m => m.Producer)
+                .Include(m => m.Actors)
+                .FirstOrDefault(m => m.Id == id);
+            return movie;
         }
 
         public Movie Update(Movie movie)
