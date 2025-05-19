@@ -47,6 +47,12 @@ namespace Tickflix.Web.Controllers
             _movieService.Delete(movie);
             return Ok();
         }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            return Ok(_movieService.GetById(id));
+        }
     }
 
 }
