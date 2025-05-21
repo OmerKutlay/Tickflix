@@ -1,0 +1,38 @@
+﻿@model Tickflix.Models.Movie
+
+@{
+    ViewData["Title"] = Model.Name + " Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.ImageURL" class="img-fluid rounded" alt="@Model.Name" />
+        </div>
+        <div class="col-md-8">
+            <h2>@Model.Name</h2>
+            <p><strong>Description:</strong> @Model.Description</p>
+            <p><strong>Category:</strong> @Model.MovieCategory</p>
+            <p><strong>Cinema:</strong> @Model.Cinema?.Name</p>
+            <p><strong>Producer:</strong> @Model.Producer?.FullName</p>
+            <p><strong>Start Date:</strong> @Model.StartDate.ToString("dd MMM yyyy")</p>
+            <p><strong>End Date:</strong> @Model.EndDate.ToString("dd MMM yyyy")</p>
+            <p>
+                <strong>Actors:</strong>
+                @if (Model.Actors != null && Model.Actors.Any())
+                {
+                    <ul>
+                        @foreach (var actor in Model.Actors)
+                        {
+                            <li>@actor.FullName</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>No actors listed.</span>
+                }
+            </p>
+        </div>
+    </div>
+</div> 
