@@ -51,7 +51,7 @@ namespace Tickflix.Web.Controllers
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            return Ok(_movieService.GetById(id));
+            return View(_movieService.GetById(id));
         }
     }
 
