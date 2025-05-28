@@ -25,4 +25,10 @@ namespace Tickflix.Web.Controllers
             _cartService.AddToCart(movieId, quantity);
             return RedirectToAction("Index");
     }
+
+        [HttpPost]
+        public IActionResult Remove(int movieId)
+        {
+            _cartService.RemoveFromCart(movieId);
+            return RedirectToAction("Index");
 }
