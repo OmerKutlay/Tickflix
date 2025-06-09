@@ -165,3 +165,50 @@
 
 </body>
 </html>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Quantity increase/decrease
+      document.querySelectorAll('.qty-controls').forEach(function (control) {
+        const minusBtn = control.querySelector('button:first-child');
+        const plusBtn = control.querySelector('button:last-child');
+        let qtySpan = control.childNodes[2]; // "1" metni
+
+        minusBtn.addEventListener('click', function () {
+          let qty = parseInt(qtySpan.textContent.trim());
+          if (qty > 1) {
+            qty--;
+            qtySpan.textContent = ' ' + qty + ' ';
+            // TODO: Backend'e güncel miktarı gönderin
+          }
+        });
+
+        plusBtn.addEventListener('click', function () {
+          let qty = parseInt(qtySpan.textContent.trim());
+          qty++;
+          qtySpan.textContent = ' ' + qty + ' ';
+          // TODO: Backend'e güncel miktarı gönderin
+        });
+      });
+
+      // Remove item
+      document.querySelectorAll('.remove-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const row = btn.closest('tr');
+          row.remove();
+          // TODO: Backend'den ürünü silin ve toplamları güncelleyin
+        });
+      });
+
+      // Apply coupon
+      document.querySelector('.apply-btn').addEventListener('click', function () {
+        const code = document.querySelector('.coupon input').value.trim();
+        if (code) {
+          // TODO: Kupon kodunu backend'e gönderin ve sonucu işleyin
+          alert('Coupon "' + code + '" applied (demo)');
+        }
+      });
+    });
+</script>
