@@ -23,7 +23,7 @@ namespace Tickflix.Web.Controllers
         public IActionResult Add(int movieId, int quantity = 1)
         {
             _cartService.AddToCart(movieId, quantity);
-            return RedirectToAction("Index");
+            return Ok();
         }
 
         [HttpPost]
