@@ -128,19 +128,22 @@
         </tr>
       </thead>
       <tbody>
+                    @foreach (var item in Model)
+                    {
         <tr>
-          <td><img src="https://via.placeholder.com/50" class="product-img" alt="Product"></td>
-          <td>$150</td>
+                            <td><img src="@item.Movie.ImageURL" class="img-fluid rounded-4 shadow-sm" alt="@item.Movie.Name" /></td>
+                            <td>@item.Movie.Price</td>
           <td class="qty-controls">
             <button>-</button>
-            1
+                                @item.Quantity
             <button>+</button>
           </td>
-          <td>$150</td>
+                            <td>@(item.Movie.Price* item.Quantity)$</td>
           <td><button class="remove-btn">X</button></td>
         </tr>
-        <!-- Diğer ürünler buraya -->
+                    }
       </tbody>
+
     </table>
   </div>
 
