@@ -127,22 +127,22 @@
           <th>Remove</th>
         </tr>
       </thead>
-      <tbody>
+                <tbody>
                     @foreach (var item in Model)
                     {
-        <tr>
+                        <tr>
                             <td><img src="@item.Movie.ImageURL" class="img-fluid rounded-4 shadow-sm" alt="@item.Movie.Name" /></td>
                             <td>@item.Movie.Price</td>
-          <td class="qty-controls">
-            <button>-</button>
+                            <td class="qty-controls">
+                                <button>-</button>
                                 @item.Quantity
-            <button>+</button>
-          </td>
+                                <button>+</button>
+                            </td>
                             <td>@(item.Movie.Price* item.Quantity)$</td>
-          <td><button class="remove-btn">X</button></td>
-        </tr>
+                            <td><button class="remove-btn">X</button></td>
+                        </tr>
                     }
-      </tbody>
+                </tbody>
 
     </table>
   </div>
