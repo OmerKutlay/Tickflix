@@ -187,29 +187,39 @@
     </table>
   </div>
 
-  <div class="summary">
+        <div class="summary-box">
+            <h4>Cart Summary</h4>
     <div class="coupon">
-      <input type="text" placeholder="Coupon Code"/>
+                <input type="text" placeholder="Coupon Code" />
       <button class="apply-btn">Apply Coupon</button>
     </div>
-
-    <h3>Cart Summary</h3>
+            @{
+                decimal subtotal = 0;
+                decimal shipping = 10;
+                foreach (var item in Model)
+                {
+                    subtotal += (decimal)(item.Movie.Price * item.Quantity);
+                }
+                decimal total = subtotal + shipping;
+            }
     <div class="summary-row">
       <span>Subtotal</span>
-      <span>$150</span>
+                <span>@subtotal$</span>
     </div>
     <div class="summary-row">
       <span>Shipping</span>
-      <span>$10</span>
+                <span>@shipping$</span>
     </div>
-    <div class="summary-row" style="font-weight: bold;">
+            <div class="summary-row total">
       <span>Total</span>
-      <span>$160</span>
+                <span>@total$</span>
     </div>
 
     <button class="checkout-btn">Proceed To Checkout</button>
   </div>
 </div>
+
+
 
 </body>
 </html>
