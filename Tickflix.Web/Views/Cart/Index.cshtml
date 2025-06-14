@@ -167,17 +167,20 @@
         <div class="product-list">
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td><img src="@item.Movie.ImageURL" class="img-fluid rounded-4 shadow-sm" alt="@item.Movie.Name" /></td>
-                            <td>@item.Movie.Price</td>
-                            <td class="qty-controls">
+                <div class="product-card">
+                    <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
+                    <div class="product-info">
+                        <h5>@item.Movie.Name</h5>
+                        <p>Price: @item.Movie.Price$</p>
+                        <div class="qty-controls">
                                 <button>-</button>
-                                @item.Quantity
+                            <span>@item.Quantity</span>
                                 <button>+</button>
-                            </td>
-                            <td>@(item.Movie.Price* item.Quantity)$</td>
-                            <td><button class="remove-btn">X</button></td>
-                        </tr>
+                        </div>
+                        <p>Total: @(item.Movie.Price* item.Quantity)$</p>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                </div>
                     }
                 </tbody>
 
