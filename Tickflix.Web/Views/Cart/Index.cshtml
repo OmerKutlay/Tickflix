@@ -18,83 +18,80 @@
     }
 
    .cart-container {
-      display: flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 20px;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .product-list {
   flex: 1;
   display: flex;
   flex-direction: column;
-      gap: 20px;
-    }
+  gap: 20px;
+}
 
 .product-card {
   display: flex;
-      background: white;
+  background: white;
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   align-items: center;
   gap: 15px;
-    }
+}
 
 .product-card img {
   width: 100px;
   height: auto;
   border-radius: 8px;
-    }
+}
 
 .product-info {
   flex: 1;
-    }
+}
 
 .qty-controls {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 8px 0;
-    }
+}
 
-    .qty-controls button {
-      padding: 5px 10px;
-      background-color: #d99d96;
-      border: none;
-      color: white;
+.qty-controls button {
+  background-color: #d99d96;
+  color: white;
   border: none;
   padding: 5px 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+  font-size: 16px;
+  cursor: pointer;
+}
 
-    .remove-btn {
-      background-color: #b14c4c;
-      border: none;
-      color: white;
+.remove-btn {
+  background-color: #b14c4c;
+  color: white;
   border: none;
-      padding: 5px 10px;
+  padding: 5px 10px;
   margin-top: 10px;
-      cursor: pointer;
-    }
+  cursor: pointer;
+}
 
 .summary-box {
-      width: 300px;
-      background: white;
-      padding: 20px;
+  width: 300px;
+  background: white;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   position: sticky;
   top: 40px;
   height: fit-content;
-    }
+}
 
 .summary-box h4 {
-      margin-bottom: 20px;
-    }
+  margin-bottom: 20px;
+}
 
 .coupon {
   display: flex;
@@ -115,11 +112,11 @@
   cursor: pointer;
 }
 
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 
 .summary-row.total {
   font-weight: bold;
@@ -127,19 +124,16 @@
   padding-top: 10px;
 }
 
-    .checkout-btn {
+.checkout-btn {
   background-color: #007bff;
-      color: white;
-      padding: 15px;
-      width: 100%;
-      text-align: center;
-      border: none;
+  color: white;
+  border: none;
   padding: 12px;
   width: 100%;
-      margin-top: 20px;
+  margin-top: 20px;
   cursor: pointer;
   border-radius: 6px;
-    }
+}
 
 
     input[type="text"] {
@@ -165,34 +159,31 @@
 <body>
     <div class="cart-container">
         <div class="product-list">
-                    @foreach (var item in Model)
-                    {
+            @foreach (var item in Model)
+            {
                 <div class="product-card">
                     <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
                     <div class="product-info">
                         <h5>@item.Movie.Name</h5>
                         <p>Price: @item.Movie.Price$</p>
                         <div class="qty-controls">
-                                <button>-</button>
+                            <button>-</button>
                             <span>@item.Quantity</span>
-                                <button>+</button>
+                            <button>+</button>
                         </div>
                         <p>Total: @(item.Movie.Price* item.Quantity)$</p>
                         <button class="remove-btn">Remove</button>
                     </div>
                 </div>
-                    }
-                </tbody>
-
-    </table>
-  </div>
+            }
+        </div>
 
         <div class="summary-box">
             <h4>Cart Summary</h4>
-    <div class="coupon">
+            <div class="coupon">
                 <input type="text" placeholder="Coupon Code" />
-      <button class="apply-btn">Apply Coupon</button>
-    </div>
+                <button class="apply-btn">Apply Coupon</button>
+            </div>
             @{
                 decimal subtotal = 0;
                 decimal shipping = 10;
@@ -202,22 +193,21 @@
                 }
                 decimal total = subtotal + shipping;
             }
-    <div class="summary-row">
-      <span>Subtotal</span>
+            <div class="summary-row">
+                <span>Subtotal</span>
                 <span>@subtotal$</span>
-    </div>
-    <div class="summary-row">
-      <span>Shipping</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
                 <span>@shipping$</span>
-    </div>
+            </div>
             <div class="summary-row total">
-      <span>Total</span>
+                <span>Total</span>
                 <span>@total$</span>
+            </div>
+            <button class="checkout-btn">Proceed To Checkout</button>
+        </div>
     </div>
-
-    <button class="checkout-btn">Proceed To Checkout</button>
-  </div>
-</div>
 
 
 
