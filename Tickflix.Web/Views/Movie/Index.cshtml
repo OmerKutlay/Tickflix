@@ -75,7 +75,7 @@
    data-id="@item.Id" 
    data-name="@item.Name">
    <i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
-												</a>
+</a>
 
 
 
@@ -391,6 +391,46 @@
 		}
 
 		
+
+
+
+		
+		$(".btn-add-to-cart").click(function (e) {
+			e.preventDefault();
+
+			const movieId = $(this).data("id");
+			const movieName = $(this).data("name");
+
+			$.ajax({
+				url: '/Cart/Add',
+				type: 'POST',
+				data: { movieId: movieId },
+				success: function () {
+					$("#cart-toast .toast-body").text(`🎉 "${movieName}" sepete eklendi.`);
+					const toast = new bootstrap.Toast(document.getElementById('cart-toast'));
+					toast.show();
+				},
+				error: function () {
+					$("#cart-toast .toast-body").text(`❌ Sepete eklenirken bir hata oluştu.`);
+					$("#cart-toast").removeClass("text-bg-success").addClass("text-bg-danger");
+					const toast = new bootstrap.Toast(document.getElementById('cart-toast'));
+					toast.show();
+				}
+			});
+		
+	});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	</script>
