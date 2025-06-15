@@ -40,43 +40,117 @@
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   align-items: center;
-  gap: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 16px;
+            margin-bottom: 20px;
+            gap: 24px;
 }
 
 .product-card img {
   width: 100px;
   height: auto;
   border-radius: 8px;
+                object-fit: cover;
 }
 
 .product-info {
+            display: flex;
+            justify-content: space-between;
   flex: 1;
+            gap: 20px;
 }
+
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        .value {
+            font-size: 16px;
+        }
 
 .qty-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 8px 0;
+            gap: 8px;
 }
 
 .qty-controls button {
+                padding: 5px 10px;
   background-color: #d99d96;
   color: white;
   border: none;
-  padding: 5px 10px;
+                color: white;
   font-size: 16px;
   cursor: pointer;
+                border-radius: 4px;
 }
+
+        .cart-header, .cart-row {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+            align-items: center;
+            padding: 12px 16px;
+            background: #fff;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .cart-header {
+            background: #f2f2f2;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .col {
+            text-align: center;
+        }
+
+            .col.name {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+                .col.name img {
+                    width: 60px;
+                    height: auto;
+                    border-radius: 6px;
+                }
+
+        .qty-btn {
+            padding: 4px 10px;
+            background-color: #d99d96;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
 
 .remove-btn {
   background-color: #b14c4c;
   color: white;
   border: none;
-  padding: 5px 10px;
-  margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 4px;
   cursor: pointer;
 }
+
+
 
 .summary-box {
   width: 300px;
