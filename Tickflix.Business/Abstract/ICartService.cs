@@ -10,7 +10,7 @@ namespace Tickflix.Business.Abstract
     public interface ICartService
     {
         Cart GetCart();
-        void AddToCart(int movieId, int quantity = 1);
+        Cart Add(Cart cart, List<CartItem> cartItems);
         void RemoveFromCart(int movieId);
         void ClearCart();
         double GetCartTotal();
