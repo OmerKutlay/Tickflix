@@ -35,10 +35,6 @@
 
 .product-card {
   display: flex;
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   align-items: center;
             background-color: #fff;
             border-radius: 12px;
@@ -233,23 +229,37 @@
 <body>
     <div class="cart-container">
         <div class="product-list">
+            <div class="cart-header">
+                <div class="col name">Name</div>
+                <div class="col price">Price</div>
+                <div class="col qty">Quantity</div>
+                <div class="col total">Total</div>
+                <div class="col remove">Remove</div>
+            </div>
+
             @foreach (var item in Model)
             {
-                <div class="product-card">
+                <div class="cart-row">
+                    <div class="col name">
+                        <div class="product">
                     <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
-                    <div class="product-info">
-                        <h5>@item.Movie.Name</h5>
-                        <p>Price: @item.Movie.Price$</p>
-                        <div class="qty-controls">
-                            <button>-</button>
-                            <span>@item.Quantity</span>
-                            <button>+</button>
+                            <span>@item.Movie.Name</span>
                         </div>
-                        <p>Total: @(item.Movie.Price* item.Quantity)$</p>
-                        <button class="remove-btn">Remove</button>
+                    </div>
+                    <div class="col price">@item.Movie.Price$</div>
+                    <div class="col qty">
+                        <button class="qty-btn">-</button>
+                            <span>@item.Quantity</span>
+                        <button class="qty-btn">+</button>
+                        </div>
+                    <div class="col total">@((item.Movie.Price * item.Quantity).ToString("0.00"))$</div>
+                    <div class="col remove">
+                        <button class="remove-btn">X</button>
                     </div>
                 </div>
             }
+
+
         </div>
 
         <div class="summary-box">
