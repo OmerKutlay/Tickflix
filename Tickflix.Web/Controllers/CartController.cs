@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tickflix.Business.Abstract;
+using Tickflix.Models;
 
 namespace Tickflix.Web.Controllers
 {
@@ -20,9 +21,9 @@ namespace Tickflix.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(int movieId, int quantity = 1)
+        public IActionResult Add(Cart cart, List<CartItem> cartItems)
         {
-            _cartService.AddToCart(movieId, quantity);
+            _cartService.Add(cart, cartItems);
             return Ok();
         }
 
