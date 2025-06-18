@@ -23,7 +23,7 @@ namespace Tickflix.Business.Concrete
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return _cartItemRepository.Delete(id);
         }
 
         public List<CartItem> GetAllByCartId(int cartId)
