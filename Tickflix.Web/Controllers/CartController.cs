@@ -40,5 +40,12 @@ namespace Tickflix.Web.Controllers
             _cartService.ClearCart();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult GetCartTotal()
+        {
+            var total = _cartService.GetCartTotal();
+            return Json(new { Total = total });
+
+        }
     }
 }
