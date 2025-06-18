@@ -18,7 +18,7 @@ namespace Tickflix.Business.Concrete
         }
         public CartItem Add(CartItem cartItem)
         {
-            throw new NotImplementedException();
+            return _cartItemRepository.Add(cartItem);
         }
 
         public bool Delete(int id)
