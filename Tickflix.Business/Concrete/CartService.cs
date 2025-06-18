@@ -21,7 +21,7 @@ namespace Tickflix.Business.Concrete
         }
 
         public void Add(Cart cart, List<CartItem> cartItems)
-        {
+        {           
             if (cart == null || cartItems == null || !cartItems.Any())
             {
                 return;
@@ -30,23 +30,23 @@ namespace Tickflix.Business.Concrete
             {
                 var existingItem = _cart.Items.FirstOrDefault(i => i.MovieId == item.MovieId);
                 if (existingItem != null)
-            {
-                    existingItem.Quantity += item.Quantity;
-            }
-            else
-            {
-                    var movie = _movieRepository.GetById(item.MovieId);
-                if (movie != null)
                 {
-                    _cart.Items.Add(new CartItem
+                    existingItem.Quantity += item.Quantity;
+                }
+                else
+                {
+                    var movie = _movieRepository.GetById(item.MovieId);
+                    if (movie != null)
                     {
+                        _cart.Items.Add(new CartItem
+                        {
                             MovieId = item.MovieId,
-                        Movie = movie,
+                            Movie = movie,
                             Quantity = item.Quantity
-                    });
+                        });
+                    }
                 }
             }
-        }
         }
 
         public void RemoveFromCart(int movieId)
@@ -61,6 +61,7 @@ namespace Tickflix.Business.Concrete
         public void ClearCart()
         {
             _cart.Items.Clear();
+            _cart.TotalPrice = 0;
         }
 
         public double GetCartTotal()
