@@ -33,7 +33,7 @@ namespace Tickflix.Business.Concrete
 
         public CartItem Update(CartItem cartItem)
         {
-            throw new NotImplementedException();
+            return _cartItemRepository.Update(cartItem);
         }
     }
 }
