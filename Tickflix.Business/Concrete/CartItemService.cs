@@ -21,9 +21,10 @@ namespace Tickflix.Business.Concrete
             return _cartItemRepository.Add(cartItem);
         }
 
-        public bool Delete(int id)
+        public bool Delete(CartItem cartItem)
         {
-            return _cartItemRepository.Delete(id);
+            _cartItemRepository.Delete(cartItem);
+            return true;
         }
 
         public List<CartItem> GetAllByCartId(int cartId)
