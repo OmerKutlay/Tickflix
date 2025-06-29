@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tickflix.Business.Abstract;
+using Tickflix.Models;
 
 namespace Tickflix.Web.Controllers
 {
@@ -24,20 +26,21 @@ namespace Tickflix.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(CartItemController item)
+        public IActionResult Add(CartItem cartItem)
         {
-            return Ok(_cartItemService.Add(item));
+            return Ok(_cartItemService.Add(cartItem));
         }
 
         [HttpPost]
-        public IActionResult Update(CartItemController item)
+        public IActionResult Update(CartItem cartItem)
         {
-            return Ok(_cartItemService.Update(item));
+            return Ok(_cartItemService.Update(cartItem));
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(CartItem cartItem)
         {
-            return Ok(_cartItemService.Delete(id));
+            return Ok(_cartItemService.Delete(cartItem));
+        }
         }
     }
