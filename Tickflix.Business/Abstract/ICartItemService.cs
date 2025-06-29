@@ -12,6 +12,6 @@ namespace Tickflix.Business.Abstract
         List<CartItem> GetAllByCartId(int cartId);
         CartItem Add(CartItem cartItem);
         CartItem Update(CartItem cartItem);
-        bool Delete(int id);
+        bool Delete(CartItem cartItem);
     }
 }
