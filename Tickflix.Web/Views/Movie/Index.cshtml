@@ -65,12 +65,29 @@
 												<a class="btn btn-outline-primary" asp-action="Detail" asp-route-id="@item.Id">
 													<i class="bi bi-eye-fill"></i> Details
 												</a>
-												<a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")"
+												@* <a class="btn btn-success text-white" asp-controller="Cart" asp-
+												   asp-route-id="@item.Id">
+													<i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
+												</a> *@
+
+
+												<a class="btn btn-success text-white btn-add-to-cart" 
+   data-id="@item.Id" 
+   data-name="@item.Name">
+   <i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
+</a>
+
+
+
+
+
+
+												@* <a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")"
 												   asp-controller="Orders"
 												   asp-action="AddItemToShoppingCart"
 												   asp-route-id="@item.Id">
 													<i class="bi bi-cart-plus"></i> Add (@item.Price.ToString("c"))
-												</a>
+												</a> *@
 											</div>
 										</div>
 									</div>
@@ -180,6 +197,21 @@
 	<a id="btnAdd" href="#" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add New</a>
 
 </div>
+
+
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+  <div id="cart-toast-container" class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1055;">
+ <div id="cart-toast" class="toast text-white bg-success show shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">      <div class="d-flex">
+        <div class="toast-body fw-bold fs-6 text-center w-100">
+          
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Kapat"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 @section Scripts {
@@ -359,6 +391,46 @@
 		}
 
 		
+
+
+
+		
+		$(".btn-add-to-cart").click(function (e) {
+			e.preventDefault();
+
+			const movieId = $(this).data("id");
+			const movieName = $(this).data("name");
+
+			$.ajax({
+				url: '/Cart/Add',
+				type: 'POST',
+				data: { movieId: movieId },
+				success: function () {
+					$("#cart-toast .toast-body").text(`🎉 "${movieName}" sepete eklendi.`);
+					const toast = new bootstrap.Toast(document.getElementById('cart-toast'));
+					toast.show();
+				},
+				error: function () {
+					$("#cart-toast .toast-body").text(`❌ Sepete eklenirken bir hata oluştu.`);
+					$("#cart-toast").removeClass("text-bg-success").addClass("text-bg-danger");
+					const toast = new bootstrap.Toast(document.getElementById('cart-toast'));
+					toast.show();
+				}
+			});
+		
+	});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	</script>

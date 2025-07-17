@@ -19,6 +19,7 @@ namespace Tickflix.Business.Configuration
             services.AddScoped<ICinemaService, CinemaService>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IProducerService, ProducerService>();
+            services.AddScoped<ICartService, CartService>();
         }
 
         public static void RepositoryDI(this IServiceCollection services)

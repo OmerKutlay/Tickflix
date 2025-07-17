@@ -1,0 +1,346 @@
+﻿@model List<Tickflix.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Your Shopping Cart";
+} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+      padding: 40px;
+    }
+
+   .cart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.product-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 16px;
+            margin-bottom: 20px;
+            gap: 24px;
+}
+
+.product-card img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+                object-fit: cover;
+}
+
+.product-info {
+            display: flex;
+            justify-content: space-between;
+  flex: 1;
+            gap: 20px;
+}
+
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        .value {
+            font-size: 16px;
+        }
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+            gap: 8px;
+}
+
+.qty-controls button {
+                padding: 5px 10px;
+  background-color: #d99d96;
+  color: white;
+  border: none;
+                color: white;
+  font-size: 16px;
+  cursor: pointer;
+                border-radius: 4px;
+}
+
+        .cart-header, .cart-row {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+            align-items: center;
+            padding: 12px 16px;
+            background: #fff;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .cart-header {
+            background: #f2f2f2;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .col {
+            text-align: center;
+        }
+
+            .col.name {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+                .col.name img {
+                    width: 60px;
+                    height: auto;
+                    border-radius: 6px;
+                }
+
+        .qty-btn {
+            padding: 4px 10px;
+            background-color: #d99d96;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+.remove-btn {
+  background-color: #b14c4c;
+  color: white;
+  border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.summary-box {
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+}
+
+.summary-box h4 {
+  margin-bottom: 20px;
+}
+
+.coupon {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.coupon input {
+  flex: 1;
+  padding: 8px;
+}
+
+.apply-btn {
+  padding: 8px 12px;
+  background: #d99d96;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-row.total {
+  font-weight: bold;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.checkout-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+
+    input[type="text"] {
+      width: calc(100% - 110px);
+      padding: 10px;
+      margin-right: 10px;
+    }
+
+    .coupon {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .apply-btn {
+      padding: 10px;
+      background: #d99d96;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class="cart-container">
+        <div class="product-list">
+            <div class="cart-header">
+                <div class="col name">Name</div>
+                <div class="col price">Price</div>
+                <div class="col qty">Quantity</div>
+                <div class="col total">Total</div>
+                <div class="col remove">Remove</div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="cart-row">
+                    <div class="col name">
+                        <div class="product">
+                    <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
+                            <span>@item.Movie.Name</span>
+                        </div>
+                    </div>
+                    <div class="col price">@item.Movie.Price$</div>
+                    <div class="col qty">
+                        <button class="qty-btn">-</button>
+                            <span>@item.Quantity</span>
+                        <button class="qty-btn">+</button>
+                        </div>
+                    <div class="col total">@((item.Movie.Price * item.Quantity).ToString("0.00"))$</div>
+                    <div class="col remove">
+                        <button class="remove-btn">X</button>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+        <div class="summary-box">
+            <h4>Cart Summary</h4>
+            <div class="coupon">
+                <input type="text" placeholder="Coupon Code" />
+                <button class="apply-btn">Apply Coupon</button>
+            </div>
+            @{
+                decimal subtotal = 0;
+                decimal shipping = 10;
+                foreach (var item in Model)
+                {
+                    subtotal += (decimal)(item.Movie.Price * item.Quantity);
+                }
+                decimal total = subtotal + shipping;
+            }
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>@subtotal$</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>@shipping$</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>@total$</span>
+            </div>
+            <button class="checkout-btn">Proceed To Checkout</button>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Quantity increase/decrease
+      document.querySelectorAll('.qty-controls').forEach(function (control) {
+        const minusBtn = control.querySelector('button:first-child');
+        const plusBtn = control.querySelector('button:last-child');
+        let qtySpan = control.childNodes[2]; // "1" metni
+
+        minusBtn.addEventListener('click', function () {
+          let qty = parseInt(qtySpan.textContent.trim());
+          if (qty > 1) {
+            qty--;
+            qtySpan.textContent = ' ' + qty + ' ';
+            // TODO: Backend'e güncel miktarı gönderin
+          }
+        });
+
+        plusBtn.addEventListener('click', function () {
+          let qty = parseInt(qtySpan.textContent.trim());
+          qty++;
+          qtySpan.textContent = ' ' + qty + ' ';
+          // TODO: Backend'e güncel miktarı gönderin
+        });
+      });
+
+      // Remove item
+      document.querySelectorAll('.remove-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const row = btn.closest('tr');
+          row.remove();
+          // TODO: Backend'den ürünü silin ve toplamları güncelleyin
+        });
+      });
+
+      // Apply coupon
+      document.querySelector('.apply-btn').addEventListener('click', function () {
+        const code = document.querySelector('.coupon input').value.trim();
+        if (code) {
+          // TODO: Kupon kodunu backend'e gönderin ve sonucu işleyin
+          alert('Coupon "' + code + '" applied (demo)');
+        }
+      });
+    });
+</script>
