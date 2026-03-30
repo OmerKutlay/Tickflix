@@ -12,8 +12,8 @@ using Tickflix.Web;
 namespace Tickflix.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250529171832_Cart")]
-    partial class Cart
+    [Migration("20250719134855_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,9 @@ namespace Tickflix.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Carts");
@@ -86,7 +89,7 @@ namespace Tickflix.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<int>("MovieId")
@@ -218,15 +221,19 @@ namespace Tickflix.Data.Migrations
 
             modelBuilder.Entity("Tickflix.Models.CartItem", b =>
                 {
-                    b.HasOne("Tickflix.Models.Cart", null)
+                    b.HasOne("Tickflix.Models.Cart", "Cart")
                         .WithMany("Items")
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Tickflix.Models.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cart");
 
                     b.Navigation("Movie");
                 });
