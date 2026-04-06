@@ -20,11 +20,11 @@ namespace Tickflix.Business.Concrete
             return _cart;
         }
 
-        public void Add(Cart cart, List<CartItem> cartItems)
+        public Cart Add(Cart cart, List<CartItem> cartItems)
         {           
             if (cart == null || cartItems == null || !cartItems.Any())
             {
-                return;
+                return cart;
             }
             foreach (var item in cartItems)
             {
@@ -47,6 +47,7 @@ namespace Tickflix.Business.Concrete
                     }
                 }
             }
+            return cart;
         }
 
         public void RemoveFromCart(int movieId)
