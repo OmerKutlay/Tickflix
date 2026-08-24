@@ -34,7 +34,25 @@ namespace Tickflix.Web.Controllers
         [HttpGet]
         public IActionResult GetById(int id)
         {
-            return Ok(_movieService.GetById(id));
+            var movie = _movieService.GetById(id);
+
+            if (movie == null)
+                return NotFound();
+
+            return Ok(new
+            {
+                movie.Id,
+                movie.Name,
+                movie.Description,
+                movie.Price,
+                movie.ImageURL,
+                movie.StartDate,
+                movie.EndDate,
+                movie.MovieCategory,
+                movie.CinemaId,
+                movie.ProducerId,
+                Actors = movie.Actors.Select(a => a.Id).ToList()
+            });
         }
         [HttpPost]
         public IActionResult Update(Movie movie)
