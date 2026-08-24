@@ -18,16 +18,17 @@
                 </div>
             </div> *@
 			<div class="card-body">
-				<div class="row">
+				<div class="row align-items-stretch">
 					@if (Model != null)
 					{
 						foreach (var item in Model)
 						{
-							<div class="col-md-4 col-xs-6 border-primary mb-3">
-								<div class="card mb-3" style="max-width: 540px;">
-									<div class="row g-0">
-										<div class="col-md-6">
-											<img src="@item.ImageURL" class="img-fluid rounded-start" alt="@item.Name" style="height: 100%; object-fit: cover;" />
+							<div class="col-md-4 col-xs-6 border-primary mb-3 d-flex">
+								<div class="card mb-3 w-100" style="max-width: 540px;">
+									<div class="row g-0 h-100">
+										<div class="col-md-6" style="min-height: 280px;">
+											<img src="@item.ImageURL" class="img-fluid rounded-start" alt="@item.Name"
+												 style="width: 100%; height: 100%; object-fit: cover;" />
 										</div>
 
 										<div class="col-md-6 d-flex flex-column justify-content-between">
@@ -40,8 +41,9 @@
 
 											<div class="card-body">
 
-												<p class="card-text">@item.Description</p>
-												<p class="card-text"><strong>Cinema:</strong> @item.Cinema?.Name</p>
+												<p class="card-text" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+													@item.Description
+												</p>												<p class="card-text"><strong>Cinema:</strong> @item.Cinema?.Name</p>
 												<p class="card-text"><strong>Category:</strong> @item.MovieCategory</p>
 												<p class="card-text"><strong>Start:</strong> @item.StartDate.ToString("dd MMM yy")</p>
 												<p class="card-text"><strong>End:</strong> @item.EndDate.ToString("dd MMM yy")</p>
