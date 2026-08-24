@@ -278,6 +278,87 @@
 			});
 		});
 			});
+
+			$(".btn-edit-movie").click(function (e) {
+    e.preventDefault();
+
+    const movieId = $(this).data("id");
+
+    $.ajax({
+        url: '/Movie/GetById',
+        type: 'GET',
+        data: { id: movieId },
+        success: function (movie) {
+
+            $("#modal").modal("show");
+
+            $("#modalTitle").text("Update Movie");
+            $("#btnSaveMovie").text("Update Movie");
+
+            $("#txtMovieName").val(movie.name);
+            $("#txtDescription").val(movie.description);
+            $("#txtImageURL").val(movie.imageURL);
+            $("#txtPrice").val(movie.price);
+
+            $("#txtStartDate").val(movie.startDate.substring(0, 10));
+            $("#txtEndDate").val(movie.endDate.substring(0, 10));
+
+            $("#ddlCategory").val(movie.movieCategory);
+            $("#ddlCinema").val(movie.cinemaId);
+            $("#ddlProducer").val(movie.producerId);
+
+            if (movie.imageURL) {
+                $("#imgPreview")
+                    .attr("src", movie.imageURL)
+                    .removeClass("d-none");
+            }
+
+            $("#actorCheckboxList input").prop("checked", false);
+
+            if (movie.actors) {
+    movie.actors.forEach(function (actorId) {
+        $("#actor_" + actorId).prop("checked", true);
+    });
+}
+
+            $("#btnSaveMovie").off("click").click(function () {
+
+                $.ajax({
+                    url: '/Movie/Update',
+                    type: 'POST',
+                    data: {
+                        Id: movie.id,
+                        Name: $("#txtMovieName").val(),
+                        Description: $("#txtDescription").val(),
+                        ImageURL: $("#txtImageURL").val(),
+                        Price: parseFloat($("#txtPrice").val()),
+                        StartDate: $("#txtStartDate").val(),
+                        EndDate: $("#txtEndDate").val(),
+                        MovieCategory: $("#ddlCategory").val(),
+                        CinemaId: parseInt($("#ddlCinema").val()),
+                        ProducerId: parseInt($("#ddlProducer").val()),
+                        Actors: $("#actorCheckboxList input:checked").map(function () {
+                            return $(this).val();
+                        }).get()
+                    },
+                    success: function () {
+                        $("#modal").modal("hide");
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Movie update failed.");
+                    }
+                });
+
+            });
+        },
+        error: function (xhr) {
+    console.log("STATUS:", xhr.status);
+    console.log("RESPONSE:", xhr.responseText);
+    alert("Movie could not be loaded. Status: " + xhr.status);
+}
+    });
+});
 		});
 
 
