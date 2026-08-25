@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tickflix.Business.Abstract;
 using Tickflix.Models;
 
@@ -21,8 +21,18 @@ namespace Tickflix.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Cart cart, List<CartItem> cartItems)
+        public IActionResult Add(int movieId)
         {
+            var cart = new Cart();
+            var cartItems = new List<CartItem>
+            {
+                new CartItem
+                {
+                    MovieId = movieId,
+                    Quantity = 1
+                }
+            };
+
             _cartService.Add(cart, cartItems);
             return Ok();
         }
@@ -40,12 +50,12 @@ namespace Tickflix.Web.Controllers
             _cartService.ClearCart();
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public IActionResult GetCartTotal()
         {
             var total = _cartService.GetCartTotal();
             return Json(new { Total = total });
-
         }
     }
 }
