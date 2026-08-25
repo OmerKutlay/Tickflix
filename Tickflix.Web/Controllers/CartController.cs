@@ -41,7 +41,28 @@ namespace Tickflix.Web.Controllers
         public IActionResult Remove(int movieId)
         {
             _cartService.RemoveFromCart(movieId);
-            return RedirectToAction("Index");
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int movieId, int quantity)
+        {
+            var cart = _cartService.GetCart();
+            var item = cart.Items.FirstOrDefault(i => i.MovieId == movieId);
+
+            if (item == null)
+                return NotFound();
+
+            if (quantity <= 0)
+            {
+                _cartService.RemoveFromCart(movieId);
+            }
+            else
+            {
+                item.Quantity = quantity;
+            }
+
+            return Ok();
         }
 
         [HttpPost]
