@@ -12,7 +12,6 @@ namespace Tickflix.Business.Abstract
         Cart GetCart();
         Cart Add(Cart cart, List<CartItem> cartItems);
         void RemoveFromCart(int movieId);
-        void UpdateQuantity(int movieId, int quantity);
         void ClearCart();
         double GetCartTotal();
     }
