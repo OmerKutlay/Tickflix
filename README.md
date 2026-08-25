@@ -275,3 +275,29 @@ This project was developed as a practical application of backend development, da
 ## 📄 License
 
 This project is developed for educational and portfolio purposes.
+
+---
+
+## Screenshost
+
+Home page:
+<img width="1904" height="940" alt="image" src="https://github.com/user-attachments/assets/73b71d4f-2030-4d4e-8f6e-0a2e8fbfee39" />
+
+Cart page:
+<img width="1361" height="639" alt="image" src="https://github.com/user-attachments/assets/9c35cd09-83ee-4067-b641-8a29c37a2de4" />
+
+Producer page:
+<img width="1885" height="811" alt="image" src="https://github.com/user-attachments/assets/cc039273-dff3-44f2-abcf-13d0b47988f1" />
+
+Movie details page:
+<img width="1222" height="776" alt="image" src="https://github.com/user-attachments/assets/5f8f4637-af44-4dc4-84dd-5fb96a016171" />
+
+Modals:
+<img width="696" height="920" alt="image" src="https://github.com/user-attachments/assets/4145bbc2-dcee-4e52-9eec-5627f399d419" />
+<img width="696" height="920" alt="image" src="https://github.com/user-attachments/assets/42ac4e3a-6c80-4c0e-baa4-e4acf309a6fa" />
+<img width="696" height="920" alt="image" src="https://github.com/user-attachments/assets/7e3e8ca7-8cee-4b63-ab30-43c44c4bd480" />
+
+
+
+
+
