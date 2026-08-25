@@ -1,8 +1,8 @@
-﻿@model List<Tickflix.Models.CartItem>
+@model List<Tickflix.Models.CartItem>
 
 @{
     ViewData["Title"] = "Your Shopping Cart";
-} 
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,8 +146,6 @@
   cursor: pointer;
 }
 
-
-
 .summary-box {
   width: 300px;
   background: white;
@@ -205,7 +203,6 @@
   border-radius: 6px;
 }
 
-
     input[type="text"] {
       width: calc(100% - 110px);
       padding: 10px;
@@ -239,34 +236,32 @@
 
             @foreach (var item in Model)
             {
-                <div class="cart-row">
+                <div class="cart-row" data-id="@item.MovieId">
                     <div class="col name">
                         <div class="product">
-                    <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
+                            <img src="@item.Movie.ImageURL" alt="@item.Movie.Name" />
                             <span>@item.Movie.Name</span>
                         </div>
                     </div>
                     <div class="col price">@item.Movie.Price$</div>
                     <div class="col qty">
-                        <button class="qty-btn">-</button>
-                            <span>@item.Quantity</span>
-                        <button class="qty-btn">+</button>
-                        </div>
+                        <button type="button" class="qty-btn decrease-btn" data-id="@item.MovieId">-</button>
+                        <span class="quantity">@item.Quantity</span>
+                        <button type="button" class="qty-btn increase-btn" data-id="@item.MovieId">+</button>
+                    </div>
                     <div class="col total">@((item.Movie.Price * item.Quantity).ToString("0.00"))$</div>
                     <div class="col remove">
-                        <button class="remove-btn">X</button>
+                        <button type="button" class="remove-btn" data-id="@item.MovieId">X</button>
                     </div>
                 </div>
             }
-
-
         </div>
 
         <div class="summary-box">
             <h4>Cart Summary</h4>
             <div class="coupon">
                 <input type="text" placeholder="Coupon Code" />
-                <button class="apply-btn">Apply Coupon</button>
+                <button class="apply-btn" type="button">Apply Coupon</button>
             </div>
             @{
                 decimal subtotal = 0;
@@ -289,58 +284,88 @@
                 <span>Total</span>
                 <span>@total$</span>
             </div>
-            <button class="checkout-btn">Proceed To Checkout</button>
+            <button class="checkout-btn" type="button">Proceed To Checkout</button>
         </div>
     </div>
-
-
-
 </body>
 </html>
 
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Quantity increase/decrease
-      document.querySelectorAll('.qty-controls').forEach(function (control) {
-        const minusBtn = control.querySelector('button:first-child');
-        const plusBtn = control.querySelector('button:last-child');
-        let qtySpan = control.childNodes[2]; // "1" metni
+        document.querySelectorAll('.increase-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const row = btn.closest('.cart-row');
+                const movieId = btn.dataset.id;
+                const quantityElement = row.querySelector('.quantity');
+                const quantity = parseInt(quantityElement.textContent.trim()) + 1;
 
-        minusBtn.addEventListener('click', function () {
-          let qty = parseInt(qtySpan.textContent.trim());
-          if (qty > 1) {
-            qty--;
-            qtySpan.textContent = ' ' + qty + ' ';
-            // TODO: Backend'e güncel miktarı gönderin
-          }
+                updateQuantity(movieId, quantity);
+            });
         });
 
-        plusBtn.addEventListener('click', function () {
-          let qty = parseInt(qtySpan.textContent.trim());
-          qty++;
-          qtySpan.textContent = ' ' + qty + ' ';
-          // TODO: Backend'e güncel miktarı gönderin
-        });
-      });
+        document.querySelectorAll('.decrease-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const row = btn.closest('.cart-row');
+                const movieId = btn.dataset.id;
+                const quantityElement = row.querySelector('.quantity');
+                const quantity = parseInt(quantityElement.textContent.trim()) - 1;
 
-      // Remove item
-      document.querySelectorAll('.remove-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          const row = btn.closest('tr');
-          row.remove();
-          // TODO: Backend'den ürünü silin ve toplamları güncelleyin
+                updateQuantity(movieId, quantity);
+            });
         });
-      });
 
-      // Apply coupon
-      document.querySelector('.apply-btn').addEventListener('click', function () {
-        const code = document.querySelector('.coupon input').value.trim();
-        if (code) {
-          // TODO: Kupon kodunu backend'e gönderin ve sonucu işleyin
-          alert('Coupon "' + code + '" applied (demo)');
+        document.querySelectorAll('.remove-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const movieId = btn.dataset.id;
+
+                fetch('/Cart/Remove', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: `movieId=${encodeURIComponent(movieId)}`
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Film sepetten silinemedi.');
+                    }
+
+                    location.reload();
+                })
+                .catch(function (error) {
+                    alert(error.message);
+                });
+            });
+        });
+
+        function updateQuantity(movieId, quantity) {
+            fetch('/Cart/UpdateQuantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: `movieId=${encodeURIComponent(movieId)}&quantity=${encodeURIComponent(quantity)}`
+            })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Film miktarı güncellenemedi.');
+                }
+
+                location.reload();
+            })
+            .catch(function (error) {
+                alert(error.message);
+            });
         }
-      });
+
+        const applyCouponButton = document.querySelector('.apply-btn');
+        if (applyCouponButton) {
+            applyCouponButton.addEventListener('click', function () {
+                const code = document.querySelector('.coupon input').value.trim();
+                if (code) {
+                    alert('Coupon "' + code + '" applied (demo)');
+                }
+            });
+        }
     });
 </script>
